@@ -1,0 +1,8 @@
+button{
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+    background-color: rgb(202, 197, 197);
+    border-color: black;
+    width: 100%;
+}

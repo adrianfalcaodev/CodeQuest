@@ -1,0 +1,9 @@
+.card{
+      min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 80px 8%;
+  background-position: center;
+  background-size: cover;
+  box-sizing: border-box;
+}

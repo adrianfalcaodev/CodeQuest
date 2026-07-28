@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.menubar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    background-color: lightgray;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.062);
+    cursor: pointer;
+}
+
+.hamburger span,
+.hamburger span::before,
+.hamburger span::after {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: black;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger span::before {
+    top: -6px;
+}
+
+.hamburger span::after {
+    top: 6px;
+}
+
+.navLinkRight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.navLink {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.navLink a,
+.auth-buttons a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.login-btn {
+    background-color: #6C17A1;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+}
+
+.register-btn {
+    background: #34028f;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    position: fixed;
+    top: 100;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    padding: 1rem;
+    background-color: gray;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.menu-toggle:checked ~ .sidebar {
+    transform: translateX(0);
+}
+
+.menu-toggle:checked ~ .menubar .hamburger span {
+    background: transparent;
+}
+
+.menu-toggle:checked ~ .menubar .hamburger span::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.menu-toggle:checked ~ .menubar .hamburger span::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background:lightgray;
+    
+}
