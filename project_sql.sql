@@ -14,3 +14,4 @@ langs VARCHAR(50), -- linguagens de programação
 score INT -- pontuação modulos
 );
 
+ALTER TABLE utilizadores ADD modulos INT, ADD FOREIGN KEY(modulos) REFERENCES modulos(id);
