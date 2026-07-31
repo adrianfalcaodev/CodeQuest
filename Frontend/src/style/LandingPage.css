@@ -1,0 +1,74 @@
+.landing {
+    display: flex;
+    align-items: center;
+    padding: clamp(2rem, 6vw, 5rem);
+    overflow: hidden;
+}
+
+.landing-text {
+    width: 50%;
+}
+
+.landing-label {
+    margin: 0 0 1rem;
+    color: #c4b5fd;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.landing h1 {
+    margin: 0;
+    text-align: left;
+    font-size: clamp(2.5rem, 6vw, 4.75rem);
+    line-height: 1.02;
+}
+
+.landing p {
+    max-width: 48ch;
+    color: #b7c0dc;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.landing-card {
+    margin: 1.75rem 0 0;
+}
+
+.imageLumen {
+    position: relative;
+    display: grid;
+    width: 50%;
+    place-items: center;
+}
+
+.imageLumen::before {
+    position: absolute;
+    width: 290px;
+    height: 290px;
+    border-radius: 50%;
+    background: #7c3aed;
+    opacity: 0.3;
+    filter: blur(45px);
+    content: "";
+}
+
+.imageLumen img {
+    position: relative;
+    filter: drop-shadow(0 24px 35px rgba(0, 0, 0, 0.35));
+}
+
+@media (max-width: 760px) {
+    .landing-text{
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .imageLumen {
+        display: none;
+    }
+
+}

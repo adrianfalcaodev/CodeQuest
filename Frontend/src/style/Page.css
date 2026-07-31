@@ -1,0 +1,60 @@
+#root {
+  min-height: 100vh;
+}
+
+.page {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.space {
+  display: none;
+}
+
+.centerboard {
+  flex: 1;
+  min-width: 0;
+}
+
+.modulo {
+  width: 100%;
+}
+
+.sideboard {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 320px);
+}
+
+.alternativa {
+  font-size: medium;
+}
+
+.container {
+  display: flex;
+  gap: 1rem;
+}
+
+.next {
+  display: flex;
+  width: max-content;
+  height: max-content;
+}
+
+@media (max-width: 760px) {
+  .page {
+    flex-direction: column;
+  }
+
+  .centerboard,
+  .sideboard {
+    width: 100%;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+}

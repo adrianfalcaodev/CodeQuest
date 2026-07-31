@@ -1,25 +1,31 @@
-import {Link} from "react-router-dom";
-import Button  from "../components/button";
+import { Link } from "react-router-dom";
+import Button from "../components/button";
+import Card from "../components/card";
 
-export default function LoginPage(){
-    return(
+export default function LoginPage() {
+    return (
         <div className="login">
-            <h1>Login</h1>
-            <div className="card">
-                <div className="card-content">
-                    <div className="item">
-                        <label htmlFor="email">Email</label>
-                        <input type="text" name="email"/>
-                    </div>
-                    <div className="item">
-                        <label htmlFor="password">Password</label>
-                        <input type="text" name="password"/>
-                    </div>
-                    <p>Esqueceu a senha? <Link to="#">Clique aqui</Link></p>
-                    <p>Não tem conta? <Link to="/registo">Registo</Link></p>
-                    <Button type="submit">Login</Button>
+            <Card title="Entrar na sua conta" subtitle="Acesse o CodeQuest para continuar a sua jornada.">
+                <div className="item">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" />
                 </div>
-            </div>
+
+                <div className="item">
+                    <label htmlFor="password">Palavra-passe</label>
+                    <input type="password" id="password" name="password" placeholder="********" />
+                </div>
+
+                <p>
+                    <Link className="card-link" to="/esqueceusenha">Esqueceu a palavra-passe?</Link>
+                </p>
+
+                <p>
+                    Ainda não tem conta? <Link className="card-link" to="/registo">Registe-se</Link>
+                </p>
+
+                <Button type="submit">Entrar</Button>
+            </Card>
         </div>
-    )
+    );
 }

@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+# Documento local de anotações sobre o visual
+STYLE_CHANGES.md

@@ -26,7 +26,7 @@ export default function RootLayout() {
 
   <aside className="sidebar">
     <h1>CodeQuest</h1>
-    <NavLink to="/"><Home/> Home</NavLink>
+    <NavLink to="/homepage"><Home/> Home</NavLink>
     <NavLink to="/linguagem"><CodeXml/> Linguagem</NavLink>
     <NavLink to="/ranking"><Earth/> LearderBoard</NavLink>
   </aside>

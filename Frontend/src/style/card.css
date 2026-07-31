@@ -1,9 +1,69 @@
-.card{
-      min-height: 72vh;
-  display: flex;
-  align-items: flex-end;
-  padding: 80px 8%;
-  background-position: center;
-  background-size: cover;
+.card {
+  width: min(100%, 480px);
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #6872a0,#2f3753 );
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.16);
   box-sizing: border-box;
+}
+
+.card-header {
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.card-subtitle {
+  margin: 0;
+  color: #f5f4f4;
+  font-size: 0.95rem;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  
+}
+
+.item label {
+  font-weight: 600;
+  color: #ffff;
+}
+
+.item input {
+  padding: 0.8rem 0.95rem;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background-color: #9aa3c9;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
+}
+
+.card-link {
+  color: #e0e0e7;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.card-link:hover {
+  text-decoration: underline;
 }
