@@ -725,7 +725,7 @@ tbody tr:hover {
 
 .app-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
   padding: 1.1rem clamp(1rem, 5vw, 4rem);
   border-top: 1px solid var(--border);

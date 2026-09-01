@@ -27,6 +27,11 @@
   margin-right: 8px;
 }
 
+.lumen-balao.visivel {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Seta do balão apontando para a imagem */
 .lumen-balao::after {
   content: '';
@@ -43,21 +48,21 @@
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.lumen-imagem {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.3));
-  transition: transform 0.3s ease;
-}
-
-.lumen-mascote:hover .lumen-balao,
-.lumen-mascote:hover .lumen-balao::after {
+.lumen-balao.visivel::after {
   opacity: 1;
   visibility: visible;
 }
 
-.lumen-mascote:hover .lumen-imagem {
+.lumen-imagem {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.3));
+  transition: transform 0.3s ease;
+
+}
+
+.lumen-imagem:hover {
   transform: scale(1.1);
 }
 
