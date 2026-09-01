@@ -1,0 +1,5 @@
+/* Compatibility styles for pages created before the shared theme. */
+#root { min-height: 100vh; }
+
+.category-action { display: block; margin-top: 1rem; }
+.category-action button { width: 100%; }

@@ -30,6 +30,7 @@ Front-end
 •	HTML5
 •	CSS3
 •	React Router
+•       Lucide React
 ________________________________________
 Back-end
 •	Node.js
