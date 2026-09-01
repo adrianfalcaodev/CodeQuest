@@ -74,7 +74,7 @@ export default function HomePage() {
   const missions = [
     {
       icon: <BookOpen />,
-      title: "Módulos concluídos",
+      title: "Javascript",
       detail: `${completedModules} módulos`,
       progress: completedModules > 0 ? 100 : 0,
       color: "green",
@@ -86,7 +86,7 @@ export default function HomePage() {
     },
     {
       icon: <Zap />,
-      title: "Desafio relâmpago",
+      title: "Python",
       detail: pythonModule ? `Quiz Python` : "Conclua um módulo Python",
       progress: 0,
       color: "gold",

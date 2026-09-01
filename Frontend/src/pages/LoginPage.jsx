@@ -66,20 +66,18 @@ export default function LoginPage() {
 
           {error && <p className="form-error">{error}</p>}
 
-          <div className="form-links">
-            <p>
-              <Link className="card-link forgot-password" to="/esqueceusenha">
-                🔑 Esqueceu a palavra-passe?
-              </Link>
-            </p>
+          <p>
+            <Link className="card-link" to="/esqueceusenha">
+              Esqueceu a palavra-passe?
+            </Link>
+          </p>
 
-            <p>
-              Ainda não tem conta?{" "}
-              <Link className="card-link" to="/registo">
-                Registe-se
-              </Link>
-            </p>
-          </div>
+          <p>
+            Ainda não tem conta?{" "}
+            <Link className="card-link" to="/registo">
+              Registar
+            </Link>
+          </p>
 
           <Button type="submit" disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}
