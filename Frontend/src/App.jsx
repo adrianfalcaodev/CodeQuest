@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext.jsx';
 import { NotificationProvider } from './context/NotificationContext.jsx';
 import Navbar from './components/Navbar.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import LumenMascot from './components/LumenMascot.jsx';
 
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
@@ -57,6 +58,7 @@ function App() {
           <span>© {new Date().getFullYear()} CodeQuest</span>
           <span>Aprender, praticar, evoluir.</span>
         </footer>
+        <LumenMascot />
       </div>
     </NotificationProvider>
   );
