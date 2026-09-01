@@ -68,14 +68,14 @@ export default function LoginPage() {
 
           <p>
             <Link className="card-link" to="/esqueceusenha">
-              Esqueceu a palavra-passe?
+              Esqueci a palavra-passe!
             </Link>
           </p>
 
           <p>
             Ainda não tem conta?{" "}
             <Link className="card-link" to="/registo">
-              Registe-se
+              Registar
             </Link>
           </p>
 
