@@ -274,6 +274,30 @@
     gap: .55rem;
 }
 
+.achievement-list-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-right: -8px;
+}
+
+.achievement-list-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.achievement-list-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.achievement-list-scroll::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 3px;
+}
+
+.achievement-list-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+}
+
 .achievement-item {
     display: flex;
     align-items: center;

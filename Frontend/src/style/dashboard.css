@@ -1,6 +1,12 @@
+.dashboard-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
 .dashboard {
-    color: var(--text);
-    padding: clamp(.5rem, 3vw, 2rem);
+  color: var(--text);
+  padding: clamp(0.5rem, 3vw, 2rem);
 }
 
 .dashboard-header {
@@ -232,6 +238,25 @@
     border-radius: 50%;
     color: var(--primary-light);
     background: rgba(124, 58, 237, .16);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.mission-action:hover:not(:disabled) {
+    background: rgba(124, 58, 237, .28);
+    transform: scale(1.1);
+}
+
+.mission-action:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.mission-action:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--text-faint);
 }
 
 .locked-icon {

@@ -138,6 +138,38 @@
   text-align: center;
   color: var(--text-muted);
   font-size: 0.9rem;
+  margin: 0;
+}
+
+.form-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-links p {
+  margin: 0;
+}
+
+.forgot-password {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.forgot-password::after {
+  background: var(--danger-light);
+}
+
+.forgot-password:hover {
+  color: var(--danger-light);
+}
+
+.forgot-password:hover::after {
+  width: 100%;
 }
 
 .card .form-error {

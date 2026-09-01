@@ -106,13 +106,20 @@ export default function LinguagensPage() {
                   {module.descricao || "Explora os fundamentos deste tema."}
                 </p>
                 <div className="module-tile-footer">
-                  <span>
-                    {module.concluido
-                      ? "Concluído"
-                      : module.estudado
-                        ? "Pronto para o quiz"
-                        : "Por iniciar"}
-                  </span>
+                  <div className="module-footer-info">
+                    <span className="module-status-text">
+                      {module.concluido
+                        ? "Concluído"
+                        : module.estudado
+                          ? "Pronto para o quiz"
+                          : "Por iniciar"}
+                    </span>
+                    {module.maxAcertos > 0 && module.totalPerguntas > 0 && (
+                      <span className="module-acertos">
+                        {module.maxAcertos}/{module.totalPerguntas} acertos
+                      </span>
+                    )}
+                  </div>
                   <Link
                     to={`/modulo/${module.id}`}
                     aria-label={`Abrir ${module.titulo}`}

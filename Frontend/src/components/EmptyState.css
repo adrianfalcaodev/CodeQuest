@@ -1,0 +1,55 @@
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  gap: 16px;
+  min-height: 300px;
+}
+
+.empty-state-icon {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.empty-state-content h2 {
+  margin: 0 0 8px 0;
+  color: var(--color-text-alt);
+  font-size: 1.5rem;
+}
+
+.empty-state-content p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.empty-state-action {
+  margin-top: 16px;
+}
+
+.empty-state-action a {
+  text-decoration: none;
+}
+
+.empty-state-action button {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.empty-state-action button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.empty-state-action button:active {
+  transform: translateY(0);
+}

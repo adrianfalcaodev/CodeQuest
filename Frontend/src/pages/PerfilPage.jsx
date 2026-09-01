@@ -112,24 +112,26 @@ export default function PerfilPage() {
         </section>
         <aside className="profile-panel">
           <h2>Conquistas</h2>
-          <div className="achievement-list">
-            {achievements.length ? (
-              achievements.slice(0, 5).map((achievement) => (
-                <div
-                  className={`achievement-item ${achievement.desbloqueada ? "unlocked" : ""}`}
-                  key={achievement.id}
-                >
-                  {achievement.desbloqueada ? (
-                    <Award size={17} />
-                  ) : (
-                    <Target size={17} />
-                  )}
-                  <span>{achievement.nome}</span>
-                </div>
-              ))
-            ) : (
-              <p>Ainda não existem conquistas.</p>
-            )}
+          <div className="achievement-list-scroll">
+            <div className="achievement-list">
+              {achievements.length ? (
+                achievements.map((achievement) => (
+                  <div
+                    className={`achievement-item ${achievement.desbloqueada ? "unlocked" : ""}`}
+                    key={achievement.id}
+                  >
+                    {achievement.desbloqueada ? (
+                      <Award size={17} />
+                    ) : (
+                      <Target size={17} />
+                    )}
+                    <span>{achievement.nome}</span>
+                  </div>
+                ))
+              ) : (
+                <p>Ainda não existem conquistas.</p>
+              )}
+            </div>
           </div>
           <p>
             {unlocked.length}/{achievements.length} desbloqueadas
