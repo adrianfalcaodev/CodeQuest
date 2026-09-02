@@ -83,6 +83,10 @@
     color: var(--tertiary-light);
 }
 
+.module-status.perfect {
+    color: var(--secondary-light);
+}
+
 .module-tile h2 {
     margin: 1.2rem 0 .55rem;
     font-size: 1.15rem;

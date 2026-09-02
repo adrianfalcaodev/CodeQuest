@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   Clock,
   Sparkles,
+  Star,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -97,16 +98,22 @@ export default function LinguagensPage() {
             </small>
           </div>
           <div className="module-grid">
-            {languageModules.map((module, index) => (
+            {languageModules.map((module, index) => {
+              const temQuiz = module.totalPerguntas > 0;
+              const pontuacaoPerfeita =
+                temQuiz && module.maxAcertos === module.totalPerguntas;
+              return (
               <article className="module-tile" key={module.id}>
                 <div className="module-tile-top">
                   <span className="module-order">
                     {String(module.ordem ?? index + 1).padStart(2, "0")}
                   </span>
                   <span
-                    className={`module-status ${module.concluido ? "done" : ""}`}
+                    className={`module-status ${pontuacaoPerfeita ? "perfect" : module.concluido ? "done" : ""}`}
                   >
-                    {module.concluido ? (
+                    {pontuacaoPerfeita ? (
+                      <Star size={19} fill="currentColor" />
+                    ) : module.concluido ? (
                       <CheckCircle2 size={19} />
                     ) : module.estudado ? (
                       <Clock size={19} />
@@ -128,7 +135,7 @@ export default function LinguagensPage() {
                           ? "Pronto para o quiz"
                           : "Por iniciar"}
                     </span>
-                    {module.maxAcertos > 0 && module.totalPerguntas > 0 && (
+                    {temQuiz && (
                       <span className="module-acertos">
                         {module.maxAcertos}/{module.totalPerguntas} acertos
                       </span>
@@ -142,7 +149,8 @@ export default function LinguagensPage() {
                   </Link>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
       ))}
