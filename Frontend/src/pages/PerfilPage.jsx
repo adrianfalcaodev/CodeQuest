@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import {
   Award,
+  Camera,
+  Check,
   CheckCircle2,
   Check,
   Flame,
-  ImagePlus,
   Pencil,
-  Save,
   Target,
   Trophy,
   UserRound,
+  X,
   Zap,
 } from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -19,6 +20,8 @@ import {
   getAchievements,
   getProfile,
   getUserStats,
+  updateProfile,
+  uploadAvatar,
   urlAvatar,
 } from "../data/api.js";
 import { getStoredUser } from "../data/auth.js";
@@ -31,14 +34,18 @@ export default function PerfilPage() {
   const [stats, setStats] = useState(null);
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editando, setEditando] = useState(false);
-  const [username, setUsername] = useState("");
-  const [ficheiro, setFicheiro] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [aGuardar, setAGuardar] = useState(false);
-  const [mensagem, setMensagem] = useState("");
-  const [erro, setErro] = useState("");
-  const inputAvatar = useRef(null);
+
+  // Edição de nome de utilizador
+  const [editandoNome, setEditandoNome] = useState(false);
+  const [novoUsername, setNovoUsername] = useState("");
+  const [aGuardarNome, setAGuardarNome] = useState(false);
+  const [erroNome, setErroNome] = useState("");
+
+  // Edição de foto de perfil
+  const fileInputRef = useRef(null);
+  const [aEnviarAvatar, setAEnviarAvatar] = useState(false);
+  const [erroAvatar, setErroAvatar] = useState("");
+
   useEffect(() => {
     Promise.all([getProfile(), getUserStats(), getAchievements()])
       .then(([profile, userStats, userAchievements]) => {
@@ -54,64 +61,70 @@ export default function PerfilPage() {
       })
       .finally(() => setLoading(false));
   }, []);
-  useEffect(() => () => preview && URL.revokeObjectURL(preview), [preview]);
 
-  function iniciarEdicao() {
-    setUsername(user.username || "");
-    setFicheiro(null);
-    setPreview(null);
-    setMensagem("");
-    setErro("");
-    setEditando(true);
+  function iniciarEdicaoNome() {
+    setNovoUsername(user.username || "");
+    setErroNome("");
+    setEditandoNome(true);
   }
 
-  function selecionarAvatar(event) {
-    const novoFicheiro = event.target.files?.[0];
-    if (!novoFicheiro) return;
-    if (!novoFicheiro.type.startsWith("image/")) {
-      setErro("Escolha uma imagem PNG, JPEG, WEBP ou GIF.");
-      return;
-    }
-    if (novoFicheiro.size > 2 * 1024 * 1024) {
-      setErro("A imagem deve ter no máximo 2 MB.");
-      return;
-    }
-    setFicheiro(novoFicheiro);
-    setPreview(URL.createObjectURL(novoFicheiro));
-    setErro("");
+  function cancelarEdicaoNome() {
+    setEditandoNome(false);
+    setErroNome("");
   }
 
-  async function guardarPerfil(event) {
+  async function guardarNome(event) {
     event.preventDefault();
-    const nome = username.trim();
-    if (!nome) {
-      setErro("O nome de utilizador é obrigatório.");
+    const username = novoUsername.trim();
+    if (!username) {
+      setErroNome("O nome de utilizador não pode ficar vazio.");
       return;
     }
-    setAGuardar(true);
-    setMensagem("");
-    setErro("");
+    if (username === user.username) {
+      setEditandoNome(false);
+      return;
+    }
+
+    setAGuardarNome(true);
+    setErroNome("");
     try {
-      let atualizado = user;
-      if (nome !== user.username) {
-        atualizado = await api.editarPerfil({ username: nome });
-      }
-      if (ficheiro) {
-        const avatar = await api.carregarAvatar(ficheiro);
-        atualizado = { ...atualizado, avatar_url: avatar.avatarUrl };
-      }
-      setUser(atualizado);
-      atualizarUtilizador(atualizado);
-      setFicheiro(null);
-      setPreview(null);
-      setEditando(false);
-      setMensagem("Perfil atualizado com sucesso.");
-    } catch (error) {
-      setErro(error.message || "Não foi possível atualizar o perfil.");
+      const atualizado = await updateProfile({ username });
+      setUser((atual) => ({ ...atual, ...atualizado }));
+      atualizarUtilizador({ username: atualizado.username });
+      setEditandoNome(false);
+    } catch (err) {
+      setErroNome(
+        err?.message || "Não foi possível atualizar o nome de utilizador.",
+      );
     } finally {
-      setAGuardar(false);
+      setAGuardarNome(false);
     }
   }
+
+  function escolherFoto() {
+    fileInputRef.current?.click();
+  }
+
+  async function alterarFoto(event) {
+    const ficheiro = event.target.files?.[0];
+    event.target.value = ""; // permite escolher o mesmo ficheiro outra vez
+    if (!ficheiro) return;
+
+    setErroAvatar("");
+    setAEnviarAvatar(true);
+    try {
+      const { avatarUrl } = await uploadAvatar(ficheiro);
+      setUser((atual) => ({ ...atual, avatar_url: avatarUrl }));
+      atualizarUtilizador({ avatar_url: avatarUrl });
+    } catch (err) {
+      setErroAvatar(
+        err?.message || "Não foi possível atualizar a foto de perfil.",
+      );
+    } finally {
+      setAEnviarAvatar(false);
+    }
+  }
+
   if (loading) return <LoadingSpinner />;
   if (!user)
     return (
@@ -138,19 +151,80 @@ export default function PerfilPage() {
   return (
     <section className="social-page">
       <header className="profile-header">
-        <span className="profile-avatar">
-          {preview || user.avatar_url ? (
-            <img src={preview || urlAvatar(user.avatar_url)} alt="Pré-visualização do avatar" />
-          ) : (
-            user.username?.[0]?.toUpperCase()
-          )}
-        </span>
-        <div>
+        <div className="profile-avatar-edit">
+          <span className="profile-avatar">
+            {user.avatar_url ? (
+              <img src={urlAvatar(user.avatar_url)} alt="" />
+            ) : (
+              user.username?.[0]?.toUpperCase()
+            )}
+          </span>
+          <button
+            type="button"
+            className="profile-avatar-trigger"
+            onClick={escolherFoto}
+            disabled={aEnviarAvatar}
+            title="Alterar foto de perfil"
+          >
+            <Camera size={16} />
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp,image/gif"
+            onChange={alterarFoto}
+            hidden
+          />
+        </div>
+        <div className="profile-header-info">
           <span className="social-kicker">
             <UserRound size={15} /> O teu perfil
           </span>
-          <h1>{user.username}</h1>
+          {editandoNome ? (
+            <form className="profile-name-edit" onSubmit={guardarNome}>
+              <input
+                type="text"
+                value={novoUsername}
+                onChange={(event) => setNovoUsername(event.target.value)}
+                autoFocus
+                maxLength={50}
+                disabled={aGuardarNome}
+              />
+              <button
+                type="submit"
+                className="profile-name-action"
+                disabled={aGuardarNome}
+                title="Guardar"
+              >
+                <Check size={17} />
+              </button>
+              <button
+                type="button"
+                className="profile-name-action"
+                onClick={cancelarEdicaoNome}
+                disabled={aGuardarNome}
+                title="Cancelar"
+              >
+                <X size={17} />
+              </button>
+            </form>
+          ) : (
+            <h1>
+              {user.username}
+              <button
+                type="button"
+                className="profile-name-edit-trigger"
+                onClick={iniciarEdicaoNome}
+                title="Editar nome de utilizador"
+              >
+                <Pencil size={15} />
+              </button>
+            </h1>
+          )}
           <p>{user.email}</p>
+          {(erroNome || erroAvatar) && (
+            <p className="profile-edit-error">{erroNome || erroAvatar}</p>
+          )}
         </div>
         <strong className="profile-level">Nível {nivel}</strong>
         <button className="btn btn-sm profile-edit-button" type="button" onClick={iniciarEdicao}>
