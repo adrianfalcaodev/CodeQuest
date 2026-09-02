@@ -1,11 +1,11 @@
 // ============================================================
-// Script de seed de conteÃºdo PYTHON: cria/atualiza 10 mÃ³dulos de
-// Python (mesma profundidade dos mÃ³dulos de JavaScript) e os
+// Script de seed de conteúdo PYTHON: cria/atualiza 10 módulos de
+// Python (mesma profundidade dos módulos de JavaScript) e os
 // respetivos quizzes de 5 perguntas cada.
 //
 // Corre com: node database/seed-content-python.js
-// Idempotente: pode ser corrido vÃ¡rias vezes sem duplicar mÃ³dulos
-// nem quizzes (identifica mÃ³dulos existentes por tÃ­tulo+linguagem).
+// Idempotente: pode ser corrido várias vezes sem duplicar módulos
+// nem quizzes (identifica módulos existentes por título+linguagem).
 // ============================================================
 import 'dotenv/config';
 import mysql from 'mysql2/promise';
@@ -22,68 +22,68 @@ const pool = mysql.createPool({
 const LINGUAGEM = 'Python';
 
 // ------------------------------------------------------------
-// MÃ³dulos (ordem 1 a 10, dentro da linguagem Python)
+// Módulos (ordem 1 a 10, dentro da linguagem Python)
 // ------------------------------------------------------------
 const modulos = [
   {
     ordem: 1,
-    titulo: 'IntroduÃ§Ã£o ao Python',
-    descricao: 'O que Ã© o Python e como executar o teu primeiro programa.',
-    conteudo: `# IntroduÃ§Ã£o ao Python
+    titulo: 'Introdução ao Python',
+    descricao: 'O que é o Python e como executar o teu primeiro programa.',
+    conteudo: `# Introdução ao Python
 
-Python Ã© uma linguagem de programaÃ§Ã£o criada para ser legÃ­vel e simples de escrever, sem perder poder. Ã‰ uma das linguagens mais usadas do mundo, tanto para iniciantes como em Ã¡reas como ciÃªncia de dados, automaÃ§Ã£o e desenvolvimento web.
+Python é uma linguagem de programação criada para ser legível e simples de escrever, sem perder poder. É uma das linguagens mais usadas do mundo, tanto para iniciantes como em áreas como ciência de dados, automação e desenvolvimento web.
 
-## Uma diferenÃ§a importante logo de inÃ­cio
+## Uma diferença importante logo de início
 
-Ao contrÃ¡rio do JavaScript, o Python **nÃ£o usa chavetas \`{}\`** para delimitar blocos de cÃ³digo â€” usa **indentaÃ§Ã£o** (espaÃ§os no inÃ­cio da linha). Isto obriga o cÃ³digo a ficar sempre organizado visualmente:
+Ao contrário do JavaScript, o Python **não usa chavetas \`{}\`** para delimitar blocos de código — usa **indentação** (espaços no início da linha). Isto obriga o código a ficar sempre organizado visualmente:
 
 \`\`\`python
 if 5 > 3:
-    print("Cinco Ã© maior que trÃªs")
-    print("Esta linha tambÃ©m estÃ¡ dentro do if")
-print("Esta jÃ¡ nÃ£o estÃ¡")
+    print("Cinco é maior que três")
+    print("Esta linha também está dentro do if")
+print("Esta já não está")
 \`\`\`
 
-Todas as linhas dentro do mesmo bloco tÃªm de ter a **mesma indentaÃ§Ã£o** (o padrÃ£o sÃ£o 4 espaÃ§os). Misturar indentaÃ§Ãµes diferentes causa erros.
+Todas as linhas dentro do mesmo bloco têm de ter a **mesma indentação** (o padrão são 4 espaços). Misturar indentações diferentes causa erros.
 
 ## O teu primeiro programa
 
 \`\`\`python
-print("OlÃ¡, CodeQuest!")
+print("Olá, CodeQuest!")
 \`\`\`
 
-\`print()\` Ã© a funÃ§Ã£o que escreve texto na consola â€” o equivalente ao \`console.log()\` do JavaScript.
+\`print()\` é a função que escreve texto na consola — o equivalente ao \`console.log()\` do JavaScript.
 
-## ComentÃ¡rios
+## Comentários
 
 \`\`\`python
-# Isto Ã© um comentÃ¡rio de uma linha
-print("Isto Ã© executado")  # isto tambÃ©m Ã© um comentÃ¡rio
+# Isto é um comentário de uma linha
+print("Isto é executado")  # isto também é um comentário
 
 """
-Isto Ã© um comentÃ¡rio
-de vÃ¡rias linhas
-(tecnicamente Ã© uma string, mas Ã© usado assim por convenÃ§Ã£o)
+Isto é um comentário
+de várias linhas
+(tecnicamente é uma string, mas é usado assim por convenção)
 """
 \`\`\`
 
-## Python Ã© interpretado
+## Python é interpretado
 
-O Python nÃ£o precisa de ser compilado antes de correr â€” um interpretador lÃª e executa o cÃ³digo linha a linha. Isto torna o ciclo de escrever/testar cÃ³digo muito rÃ¡pido, mas tambÃ©m significa que sÃ³ descobres um erro numa linha quando o programa a tenta executar.
+O Python não precisa de ser compilado antes de correr — um interpretador lê e executa o código linha a linha. Isto torna o ciclo de escrever/testar código muito rápido, mas também significa que só descobres um erro numa linha quando o programa a tenta executar.
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Escreve um programa em Python que mostre, em trÃªs linhas separadas com \`print()\`, o teu nome, a tua idade e a linguagem que estÃ¡s a aprender. Usa pelo menos um comentÃ¡rio a explicar o que o cÃ³digo faz.`,
+Escreve um programa em Python que mostre, em três linhas separadas com \`print()\`, o teu nome, a tua idade e a linguagem que estás a aprender. Usa pelo menos um comentário a explicar o que o código faz.`,
   },
   {
     ordem: 2,
-    titulo: 'VariÃ¡veis em Python',
+    titulo: 'Variáveis em Python',
     descricao: 'Como guardar e manipular dados em Python.',
-    conteudo: `# VariÃ¡veis em Python
+    conteudo: `# Variáveis em Python
 
-Uma variÃ¡vel Ã© um nome que aponta para um valor guardado na memÃ³ria. Em Python, criar uma variÃ¡vel Ã© tÃ£o simples como atribuir-lhe um valor â€” nÃ£o Ã© preciso declarar o tipo nem usar palavras-chave como \`let\` ou \`const\`.
+Uma variável é um nome que aponta para um valor guardado na memória. Em Python, criar uma variável é tão simples como atribuir-lhe um valor — não é preciso declarar o tipo nem usar palavras-chave como \`let\` ou \`const\`.
 
-## Criar variÃ¡veis
+## Criar variáveis
 
 \`\`\`python
 idade = 25
@@ -91,52 +91,52 @@ nome = "Ana"
 preco = 9.99
 \`\`\`
 
-Ao contrÃ¡rio do JavaScript, o Python **nÃ£o distingue** \`let\`/\`const\`/\`var\` â€” todas as variÃ¡veis podem ser reatribuÃ­das por omissÃ£o:
+Ao contrário do JavaScript, o Python **não distingue** \`let\`/\`const\`/\`var\` — todas as variáveis podem ser reatribuídas por omissão:
 
 \`\`\`python
 pontos = 0
-pontos = 10        # vÃ¡lido, reatribuiÃ§Ã£o normal
+pontos = 10        # válido, reatribuição normal
 pontos = pontos + 5  # agora pontos vale 15
 \`\`\`
 
-## Constantes (por convenÃ§Ã£o)
+## Constantes (por convenção)
 
-Python nÃ£o tem uma forma nativa de impedir a reatribuiÃ§Ã£o de uma variÃ¡vel. Por convenÃ§Ã£o, escreve-se o nome todo em maiÃºsculas para sinalizar "isto nÃ£o devia mudar":
+Python não tem uma forma nativa de impedir a reatribuição de uma variável. Por convenção, escreve-se o nome todo em maiúsculas para sinalizar "isto não devia mudar":
 
 \`\`\`python
-IDADE_MINIMA = 18  # continua a poder ser alterada, mas o nome avisa que nÃ£o devia
+IDADE_MINIMA = 18  # continua a poder ser alterada, mas o nome avisa que não devia
 \`\`\`
 
-## AtribuiÃ§Ã£o mÃºltipla
+## Atribuição múltipla
 
-Uma conveniÃªncia do Python que o JavaScript nÃ£o tem diretamente:
+Uma conveniência do Python que o JavaScript não tem diretamente:
 
 \`\`\`python
 x, y, z = 1, 2, 3
 print(x, y, z)  # 1 2 3
 
-a = b = 0  # ambas as variÃ¡veis ficam com o valor 0
+a = b = 0  # ambas as variáveis ficam com o valor 0
 \`\`\`
 
-## Regras para nomes de variÃ¡veis
+## Regras para nomes de variáveis
 
-- NÃ£o podem comeÃ§ar por um nÃºmero (\`1nome\` Ã© invÃ¡lido, \`nome1\` Ã© vÃ¡lido).
-- Usam-se letras, nÃºmeros e underscore (\`_\`) â€” a convenÃ§Ã£o em Python Ã© \`snake_case\` (\`nome_completo\`), ao contrÃ¡rio do \`camelCase\` do JavaScript.
-- SÃ£o sensÃ­veis a maiÃºsculas/minÃºsculas: \`idade\` e \`Idade\` sÃ£o variÃ¡veis diferentes.
+- Não podem começar por um número (\`1nome\` é inválido, \`nome1\` é válido).
+- Usam-se letras, números e underscore (\`_\`) — a convenção em Python é \`snake_case\` (\`nome_completo\`), ao contrário do \`camelCase\` do JavaScript.
+- São sensíveis a maiúsculas/minúsculas: \`idade\` e \`Idade\` são variáveis diferentes.
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Cria trÃªs variÃ¡veis: uma com o teu nome, uma com a tua pontuaÃ§Ã£o atual num jogo (comeÃ§a em 0) e outra com o nÃºmero de vidas (comeÃ§a em 3). Depois, simula perder uma vida e ganhar 50 pontos, atualizando as variÃ¡veis, e mostra o resultado final com \`print()\`.`,
+Cria três variáveis: uma com o teu nome, uma com a tua pontuação atual num jogo (começa em 0) e outra com o número de vidas (começa em 3). Depois, simula perder uma vida e ganhar 50 pontos, atualizando as variáveis, e mostra o resultado final com \`print()\`.`,
   },
   {
     ordem: 3,
     titulo: 'Tipos de Dados em Python',
-    descricao: 'NÃºmeros, strings, booleanos e outros tipos em Python.',
+    descricao: 'Números, strings, booleanos e outros tipos em Python.',
     conteudo: `# Tipos de Dados em Python
 
-Todo o valor em Python tem um tipo, e o Python consegue adivinhar automaticamente qual Ã© (chama-se a isto **tipagem dinÃ¢mica**).
+Todo o valor em Python tem um tipo, e o Python consegue adivinhar automaticamente qual é (chama-se a isto **tipagem dinâmica**).
 
-## int e float (nÃºmeros)
+## int e float (números)
 
 \`\`\`python
 inteiro = 42        # int
@@ -144,22 +144,22 @@ decimal = 3.14      # float
 negativo = -7       # int
 \`\`\`
 
-Ao contrÃ¡rio do JavaScript (que trata tudo como \`number\`), o Python distingue \`int\` (inteiro) de \`float\` (decimal).
+Ao contrário do JavaScript (que trata tudo como \`number\`), o Python distingue \`int\` (inteiro) de \`float\` (decimal).
 
 ## str (texto)
 
 \`\`\`python
 nome = "Diogo"
-saudacao = 'OlÃ¡!'
-mensagem = f"OlÃ¡, {nome}!"  # f-string: insere variÃ¡veis com {}
+saudacao = 'Olá!'
+mensagem = f"Olá, {nome}!"  # f-string: insere variáveis com {}
 \`\`\`
 
-As **f-strings** (com um \`f\` antes das aspas) sÃ£o o equivalente Ã s template strings do JavaScript.
+As **f-strings** (com um \`f\` antes das aspas) são o equivalente às template strings do JavaScript.
 
 ## bool (verdadeiro/falso)
 
 \`\`\`python
-esta_logado = True   # comeÃ§a sempre com maiÃºscula em Python!
+esta_logado = True   # começa sempre com maiúscula em Python!
 tem_erros = False
 \`\`\`
 
@@ -169,7 +169,7 @@ tem_erros = False
 resultado = None  # representa "sem valor", como null em JavaScript
 \`\`\`
 
-Python nÃ£o distingue \`undefined\` de \`null\` como o JavaScript â€” sÃ³ existe \`None\`.
+Python não distingue \`undefined\` de \`null\` como o JavaScript — só existe \`None\`.
 
 ## Verificar o tipo de um valor
 
@@ -180,44 +180,44 @@ print(type(True))        # <class 'bool'>
 print(type(None))        # <class 'NoneType'>
 \`\`\`
 
-## ConversÃ£o entre tipos
+## Conversão entre tipos
 
 \`\`\`python
 texto_idade = "25"
 idade = int(texto_idade)     # 25 (int)
 texto = str(idade)            # "25" (str)
 
-print("5" + "3")   # "53" (concatena, porque ambos sÃ£o strings)
-print(int("5") + 3)  # 8 (soma, porque converteu para nÃºmero)
+print("5" + "3")   # "53" (concatena, porque ambos são strings)
+print(int("5") + 3)  # 8 (soma, porque converteu para número)
 \`\`\`
 
-Nota: ao contrÃ¡rio do JavaScript, o Python **dÃ¡ erro** se tentares somar um \`int\` com uma \`str\` diretamente (\`5 + "3"\` falha) â€” tens sempre de converter primeiro.
+Nota: ao contrário do JavaScript, o Python **dá erro** se tentares somar um \`int\` com uma \`str\` diretamente (\`5 + "3"\` falha) — tens sempre de converter primeiro.
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Cria uma variÃ¡vel \`str\` com o valor \`"10"\` e uma variÃ¡vel \`int\` com o valor \`5\`. Tenta somÃ¡-las diretamente com \`+\` (repara no erro), depois converte a string para \`int\` com \`int()\` e soma outra vez, comparando os dois comportamentos.`,
+Cria uma variável \`str\` com o valor \`"10"\` e uma variável \`int\` com o valor \`5\`. Tenta somá-las diretamente com \`+\` (repara no erro), depois converte a string para \`int\` com \`int()\` e soma outra vez, comparando os dois comportamentos.`,
   },
   {
     ordem: 4,
     titulo: 'Operadores em Python',
-    descricao: 'Operadores aritmÃ©ticos, de comparaÃ§Ã£o e lÃ³gicos em Python.',
+    descricao: 'Operadores aritméticos, de comparação e lógicos em Python.',
     conteudo: `# Operadores em Python
 
-## Operadores aritmÃ©ticos
+## Operadores aritméticos
 
 \`\`\`python
 print(10 + 3)   # 13 (soma)
-print(10 - 3)   # 7  (subtraÃ§Ã£o)
-print(10 * 3)   # 30 (multiplicaÃ§Ã£o)
-print(10 / 3)   # 3.3333... (divisÃ£o, resultado sempre float)
-print(10 // 3)  # 3  (divisÃ£o inteira, arredonda para baixo)
-print(10 % 3)   # 1  (resto da divisÃ£o, "mÃ³dulo")
-print(10 ** 2)  # 100 (potÃªncia)
+print(10 - 3)   # 7  (subtração)
+print(10 * 3)   # 30 (multiplicação)
+print(10 / 3)   # 3.3333... (divisão, resultado sempre float)
+print(10 // 3)  # 3  (divisão inteira, arredonda para baixo)
+print(10 % 3)   # 1  (resto da divisão, "módulo")
+print(10 ** 2)  # 100 (potência)
 \`\`\`
 
-Repara no \`//\` (divisÃ£o inteira) â€” nÃ£o existe em JavaScript e Ã© muito usado em Python. O operador \`%\` funciona da mesma forma que em JavaScript, muito usado para saber se um nÃºmero Ã© par: \`numero % 2 == 0\`.
+Repara no \`//\` (divisão inteira) — não existe em JavaScript e é muito usado em Python. O operador \`%\` funciona da mesma forma que em JavaScript, muito usado para saber se um número é par: \`numero % 2 == 0\`.
 
-## Operadores de atribuiÃ§Ã£o
+## Operadores de atribuição
 
 \`\`\`python
 pontos = 10
@@ -226,39 +226,39 @@ pontos -= 2   # pontos = pontos - 2 -> 13
 pontos *= 2   # pontos = pontos * 2 -> 26
 \`\`\`
 
-## Operadores de comparaÃ§Ã£o
+## Operadores de comparação
 
 \`\`\`python
-print(5 == "5")   # False (Python NÃƒO converte tipos automaticamente)
+print(5 == "5")   # False (Python NÃO converte tipos automaticamente)
 print(5 == 5)     # True
 print(5 != 3)     # True
 print(10 > 5)     # True
 print(10 <= 10)   # True
 \`\`\`
 
-Uma diferenÃ§a importante: em Python, **nÃ£o existe** \`===\`/\`!==\` como no JavaScript â€” o \`==\` jÃ¡ compara sempre valor e tipo, sem conversÃµes escondidas. Isto torna o Python mais previsÃ­vel nesta parte.
+Uma diferença importante: em Python, **não existe** \`===\`/\`!==\` como no JavaScript — o \`==\` já compara sempre valor e tipo, sem conversões escondidas. Isto torna o Python mais previsível nesta parte.
 
-## Operadores lÃ³gicos
+## Operadores lógicos
 
-Em Python, os operadores lÃ³gicos escrevem-se por extenso, em inglÃªs, em vez de sÃ­mbolos:
+Em Python, os operadores lógicos escrevem-se por extenso, em inglês, em vez de símbolos:
 
 \`\`\`python
 tem_conta = True
 tem_saldo = False
 
-print(tem_conta and tem_saldo)  # False (E: as duas tÃªm de ser True)
+print(tem_conta and tem_saldo)  # False (E: as duas têm de ser True)
 print(tem_conta or tem_saldo)   # True  (OU: basta uma ser True)
-print(not tem_conta)            # False (NÃƒO: inverte o valor)
+print(not tem_conta)            # False (NÃO: inverte o valor)
 \`\`\`
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Escreve cÃ³digo que declare um nÃºmero numa variÃ¡vel e use o operador \`%\` para mostrar (com \`print\`) se esse nÃºmero Ã© par ou Ã­mpar. Testa tambÃ©m a divisÃ£o inteira \`//\` com dois nÃºmeros diferentes e compara o resultado com a divisÃ£o normal \`/\`.`,
+Escreve código que declare um número numa variável e use o operador \`%\` para mostrar (com \`print\`) se esse número é par ou ímpar. Testa também a divisão inteira \`//\` com dois números diferentes e compara o resultado com a divisão normal \`/\`.`,
   },
   {
     ordem: 5,
     titulo: 'Condicionais em Python',
-    descricao: 'if, elif e else para tomar decisÃµes no cÃ³digo.',
+    descricao: 'if, elif e else para tomar decisões no código.',
     conteudo: `# Condicionais em Python
 
 ## if / else
@@ -267,16 +267,16 @@ Escreve cÃ³digo que declare um nÃºmero numa variÃ¡vel e use o operador \`%
 idade = 16
 
 if idade >= 18:
-    print("Ã‰s maior de idade.")
+    print("És maior de idade.")
 else:
-    print("Ã‰s menor de idade.")
+    print("És menor de idade.")
 \`\`\`
 
-Repara: nÃ£o hÃ¡ chavetas \`{}\` â€” o bloco Ã© definido pela indentaÃ§Ã£o, e a linha do \`if\` termina em dois pontos (\`:\`).
+Repara: não há chavetas \`{}\` — o bloco é definido pela indentação, e a linha do \`if\` termina em dois pontos (\`:\`).
 
-## elif â€” vÃ¡rias condiÃ§Ãµes
+## elif — várias condições
 
-Em Python, "senÃ£o se" escreve-se \`elif\` (nÃ£o \`else if\`):
+Em Python, "senão se" escreve-se \`elif\` (não \`else if\`):
 
 \`\`\`python
 nota = 14
@@ -291,9 +291,9 @@ else:
     print("Reprovado")
 \`\`\`
 
-As condiÃ§Ãµes sÃ£o verificadas por ordem, de cima para baixo, e sÃ³ o primeiro bloco cuja condiÃ§Ã£o Ã© verdadeira Ã© executado.
+As condições são verificadas por ordem, de cima para baixo, e só o primeiro bloco cuja condição é verdadeira é executado.
 
-## CondiÃ§Ãµes combinadas
+## Condições combinadas
 
 \`\`\`python
 idade = 20
@@ -303,9 +303,9 @@ if idade >= 18 and tem_carta:
     print("Pode conduzir.")
 \`\`\`
 
-## Python nÃ£o tem switch
+## Python não tem switch
 
-O Python (nas versÃµes mais usadas em contexto de aprendizagem) nÃ£o tem uma instruÃ§Ã£o \`switch\` tradicional â€” usa-se uma sequÃªncia de \`if/elif\` em alternativa:
+O Python (nas versões mais usadas em contexto de aprendizagem) não tem uma instrução \`switch\` tradicional — usa-se uma sequência de \`if/elif\` em alternativa:
 
 \`\`\`python
 dia_semana = 3
@@ -313,14 +313,14 @@ dia_semana = 3
 if dia_semana == 1:
     print("Segunda-feira")
 elif dia_semana == 2:
-    print("TerÃ§a-feira")
+    print("Terça-feira")
 elif dia_semana == 3:
     print("Quarta-feira")
 else:
     print("Outro dia")
 \`\`\`
 
-## ExpressÃ£o condicional numa linha
+## Expressão condicional numa linha
 
 Uma forma compacta de escrever um if/else simples, muito usada em Python:
 
@@ -330,29 +330,29 @@ estado = "adulto" if idade >= 18 else "menor"
 print(estado)  # "adulto"
 \`\`\`
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Escreve um programa que declare uma variÃ¡vel \`nota\` (0 a 20) e use \`if/elif/else\` para mostrar "Aprovado" se a nota for maior ou igual a 10, e "Reprovado" caso contrÃ¡rio. Testa o teu cÃ³digo com pelo menos trÃªs valores diferentes de nota.`,
+Escreve um programa que declare uma variável \`nota\` (0 a 20) e use \`if/elif/else\` para mostrar "Aprovado" se a nota for maior ou igual a 10, e "Reprovado" caso contrário. Testa o teu código com pelo menos três valores diferentes de nota.`,
   },
   {
     ordem: 6,
     titulo: 'Loops em Python',
-    descricao: 'for e while para repetir cÃ³digo em Python.',
+    descricao: 'for e while para repetir código em Python.',
     conteudo: `# Loops em Python
 
-## for â€” percorrer uma sequÃªncia
+## for — percorrer uma sequência
 
-Ao contrÃ¡rio do JavaScript, o \`for\` do Python nÃ£o tem inicializaÃ§Ã£o/condiÃ§Ã£o/incremento â€” percorre diretamente uma sequÃªncia de valores, muitas vezes gerada com \`range()\`:
+Ao contrário do JavaScript, o \`for\` do Python não tem inicialização/condição/incremento — percorre diretamente uma sequência de valores, muitas vezes gerada com \`range()\`:
 
 \`\`\`python
 for i in range(5):
-    print("IteraÃ§Ã£o nÃºmero", i)
+    print("Iteração número", i)
 # Mostra: 0, 1, 2, 3, 4
 \`\`\`
 
-\`range(5)\` gera os nÃºmeros de 0 a 4. \`range(2, 8)\` gera de 2 a 7, e \`range(0, 10, 2)\` gera de 2 em 2 (0, 2, 4, 6, 8).
+\`range(5)\` gera os números de 0 a 4. \`range(2, 8)\` gera de 2 a 7, e \`range(0, 10, 2)\` gera de 2 em 2 (0, 2, 4, 6, 8).
 
-## while â€” repete enquanto uma condiÃ§Ã£o for verdadeira
+## while — repete enquanto uma condição for verdadeira
 
 \`\`\`python
 tentativas = 0
@@ -362,18 +362,18 @@ while tentativas < 3:
     tentativas += 1
 \`\`\`
 
-**Cuidado com loops infinitos**: se te esqueceres de atualizar a condiÃ§Ã£o (\`tentativas += 1\`), o ciclo nunca para.
+**Cuidado com loops infinitos**: se te esqueceres de atualizar a condição (\`tentativas += 1\`), o ciclo nunca para.
 
-## Python nÃ£o tem do...while
+## Python não tem do...while
 
-NÃ£o existe uma instruÃ§Ã£o \`do...while\` nativa em Python. Para simular "executa pelo menos uma vez", usa-se um \`while True\` com um \`break\` condicional:
+Não existe uma instrução \`do...while\` nativa em Python. Para simular "executa pelo menos uma vez", usa-se um \`while True\` com um \`break\` condicional:
 
 \`\`\`python
 import random
 
 while True:
     numero = random.randint(1, 10)
-    print("NÃºmero gerado:", numero)
+    print("Número gerado:", numero)
     if numero == 7:
         break
 \`\`\`
@@ -387,7 +387,7 @@ for nome in nomes:
     print(nome)
 \`\`\`
 
-NÃ£o precisas de Ã­ndices para percorrer uma lista â€” o \`for ... in\` dÃ¡-te diretamente cada elemento.
+Não precisas de índices para percorrer uma lista — o \`for ... in\` dá-te diretamente cada elemento.
 
 ## break e continue
 
@@ -396,35 +396,35 @@ for i in range(10):
     if i == 5:
         break       # sai do ciclo imediatamente
     if i % 2 == 0:
-        continue    # salta para a prÃ³xima iteraÃ§Ã£o
-    print(i)  # mostra sÃ³ 1 e 3
+        continue    # salta para a próxima iteração
+    print(i)  # mostra só 1 e 3
 \`\`\`
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Usa um ciclo \`for\` com \`range()\` para mostrar todos os nÃºmeros de 1 a 20, mas usa \`continue\` para saltar os mÃºltiplos de 3.`,
+Usa um ciclo \`for\` com \`range()\` para mostrar todos os números de 1 a 20, mas usa \`continue\` para saltar os múltiplos de 3.`,
   },
   {
     ordem: 7,
-    titulo: 'FunÃ§Ãµes em Python',
-    descricao: 'Como criar e reutilizar blocos de cÃ³digo em Python.',
-    conteudo: `# FunÃ§Ãµes em Python
+    titulo: 'Funções em Python',
+    descricao: 'Como criar e reutilizar blocos de código em Python.',
+    conteudo: `# Funções em Python
 
-Uma funÃ§Ã£o Ã© um bloco de cÃ³digo reutilizÃ¡vel, definido em Python com a palavra-chave \`def\`.
+Uma função é um bloco de código reutilizável, definido em Python com a palavra-chave \`def\`.
 
-## Definir e chamar uma funÃ§Ã£o
+## Definir e chamar uma função
 
 \`\`\`python
 def saudar(nome):
-    print("OlÃ¡, " + nome + "!")
+    print("Olá, " + nome + "!")
 
-saudar("Marta")  # "OlÃ¡, Marta!"
-saudar("Rui")    # "OlÃ¡, Rui!"
+saudar("Marta")  # "Olá, Marta!"
+saudar("Rui")    # "Olá, Rui!"
 \`\`\`
 
-\`nome\` Ã© um **parÃ¢metro**. Quando chamamos \`saudar("Marta")\`, \`"Marta"\` Ã© o **argumento**.
+\`nome\` é um **parâmetro**. Quando chamamos \`saudar("Marta")\`, \`"Marta"\` é o **argumento**.
 
-## FunÃ§Ãµes que devolvem valores
+## Funções que devolvem valores
 
 \`\`\`python
 def somar(a, b):
@@ -434,21 +434,21 @@ resultado = somar(3, 4)  # resultado vale 7
 print(resultado)
 \`\`\`
 
-Sem \`return\`, uma funÃ§Ã£o em Python devolve \`None\` (o equivalente ao \`undefined\` do JavaScript).
+Sem \`return\`, uma função em Python devolve \`None\` (o equivalente ao \`undefined\` do JavaScript).
 
-## ParÃ¢metros com valor por omissÃ£o
+## Parâmetros com valor por omissão
 
 \`\`\`python
 def saudar(nome="visitante"):
-    print("OlÃ¡,", nome)
+    print("Olá,", nome)
 
-saudar()        # "OlÃ¡, visitante"
-saudar("Ana")   # "OlÃ¡, Ana"
+saudar()        # "Olá, visitante"
+saudar("Ana")   # "Olá, Ana"
 \`\`\`
 
 ## Argumentos por nome (keyword arguments)
 
-Uma funcionalidade do Python sem equivalente direto no JavaScript: podes passar argumentos indicando o nome do parÃ¢metro, em qualquer ordem:
+Uma funcionalidade do Python sem equivalente direto no JavaScript: podes passar argumentos indicando o nome do parâmetro, em qualquer ordem:
 
 \`\`\`python
 def apresentar(nome, idade):
@@ -457,7 +457,7 @@ def apresentar(nome, idade):
 apresentar(idade=30, nome="Sofia")  # "Sofia tem 30 anos"
 \`\`\`
 
-## FunÃ§Ãµes lambda (equivalente Ã s arrow functions)
+## Funções lambda (equivalente às arrow functions)
 
 \`\`\`python
 somar = lambda a, b: a + b
@@ -467,11 +467,11 @@ print(somar(2, 3))  # 5
 print(dobro(4))     # 8
 \`\`\`
 
-Uma \`lambda\` sÃ³ pode ter uma expressÃ£o (sem vÃ¡rias linhas de lÃ³gica) â€” para funÃ§Ãµes mais complexas, usa-se sempre \`def\`.
+Uma \`lambda\` só pode ter uma expressão (sem várias linhas de lógica) — para funções mais complexas, usa-se sempre \`def\`.
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Escreve uma funÃ§Ã£o \`calcular_media(nota1, nota2, nota3)\` que devolva a mÃ©dia das trÃªs notas. Chama a funÃ§Ã£o com valores diferentes e mostra o resultado com \`print()\`.`,
+Escreve uma função \`calcular_media(nota1, nota2, nota3)\` que devolva a média das três notas. Chama a função com valores diferentes e mostra o resultado com \`print()\`.`,
   },
   {
     ordem: 8,
@@ -479,20 +479,20 @@ Escreve uma funÃ§Ã£o \`calcular_media(nota1, nota2, nota3)\` que devolva a m
     descricao: 'O equivalente Python aos arrays: listas ordenadas de valores.',
     conteudo: `# Listas em Python
 
-Uma lista (\`list\`) Ã© o equivalente Python a um array â€” uma coleÃ§Ã£o ordenada de valores.
+Uma lista (\`list\`) é o equivalente Python a um array — uma coleção ordenada de valores.
 
 ## Criar e aceder a uma lista
 
 \`\`\`python
-frutas = ["maÃ§Ã£", "banana", "pera"]
+frutas = ["maçã", "banana", "pera"]
 
-print(frutas[0])       # "maÃ§Ã£" (o primeiro Ã­ndice Ã© sempre 0)
+print(frutas[0])       # "maçã" (o primeiro índice é sempre 0)
 print(frutas[2])       # "pera"
-print(frutas[-1])      # "pera" (Ã­ndice negativo conta a partir do fim!)
-print(len(frutas))     # 3 (nÃºmero de elementos)
+print(frutas[-1])      # "pera" (índice negativo conta a partir do fim!)
+print(len(frutas))     # 3 (número de elementos)
 \`\`\`
 
-Os Ã­ndices negativos sÃ£o uma conveniÃªncia do Python que o JavaScript nÃ£o tem diretamente: \`-1\` Ã© sempre o Ãºltimo elemento.
+Os índices negativos são uma conveniência do Python que o JavaScript não tem diretamente: \`-1\` é sempre o último elemento.
 
 ## Adicionar e remover elementos
 
@@ -500,9 +500,9 @@ Os Ã­ndices negativos sÃ£o uma conveniÃªncia do Python que o JavaScript n�
 numeros = [1, 2, 3]
 
 numeros.append(4)     # adiciona no fim: [1, 2, 3, 4]
-numeros.pop()          # remove e devolve o Ãºltimo: [1, 2, 3]
-numeros.insert(0, 0)   # insere na posiÃ§Ã£o 0: [0, 1, 2, 3]
-numeros.remove(2)      # remove o VALOR 2 (nÃ£o o Ã­ndice): [0, 1, 3]
+numeros.pop()          # remove e devolve o último: [1, 2, 3]
+numeros.insert(0, 0)   # insere na posição 0: [0, 1, 2, 3]
+numeros.remove(2)      # remove o VALOR 2 (não o índice): [0, 1, 3]
 \`\`\`
 
 ## Percorrer uma lista
@@ -523,7 +523,7 @@ dobros = [n * 2 for n in numeros]  # "list comprehension"
 print(dobros)  # [2, 4, 6, 8]
 \`\`\`
 
-As **list comprehensions** sÃ£o a forma mais comum, em Python, de transformar uma lista noutra â€” equivalem ao \`.map()\` do JavaScript, mas com uma sintaxe prÃ³pria.
+As **list comprehensions** são a forma mais comum, em Python, de transformar uma lista noutra — equivalem ao \`.map()\` do JavaScript, mas com uma sintaxe própria.
 
 ## Filtrar uma lista (equivalente ao filter)
 
@@ -538,24 +538,24 @@ print(adultos)  # [18, 25, 30]
 
 \`\`\`python
 numeros = [0, 1, 2, 3, 4, 5]
-print(numeros[1:4])   # [1, 2, 3] (do Ã­ndice 1 atÃ© ao 3, sem incluir o 4)
-print(numeros[:3])    # [0, 1, 2] (do inÃ­cio atÃ© ao Ã­ndice 2)
-print(numeros[3:])    # [3, 4, 5] (do Ã­ndice 3 atÃ© ao fim)
+print(numeros[1:4])   # [1, 2, 3] (do índice 1 até ao 3, sem incluir o 4)
+print(numeros[:3])    # [0, 1, 2] (do início até ao índice 2)
+print(numeros[3:])    # [3, 4, 5] (do índice 3 até ao fim)
 \`\`\`
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Cria uma lista com as notas de 5 alunos. Usa uma list comprehension para criar uma nova lista sÃ³ com as notas de aprovado (\`>= 10\`), e percorre-a com um \`for\` para mostrar cada uma.`,
+Cria uma lista com as notas de 5 alunos. Usa uma list comprehension para criar uma nova lista só com as notas de aprovado (\`>= 10\`), e percorre-a com um \`for\` para mostrar cada uma.`,
   },
   {
     ordem: 9,
-    titulo: 'DicionÃ¡rios em Python',
-    descricao: 'O equivalente Python aos objetos: coleÃ§Ãµes chave-valor.',
-    conteudo: `# DicionÃ¡rios em Python
+    titulo: 'Dicionários em Python',
+    descricao: 'O equivalente Python aos objetos: coleções chave-valor.',
+    conteudo: `# Dicionários em Python
 
-Um dicionÃ¡rio (\`dict\`) Ã© o equivalente Python a um objeto â€” uma coleÃ§Ã£o de dados organizados em pares **chave: valor**.
+Um dicionário (\`dict\`) é o equivalente Python a um objeto — uma coleção de dados organizados em pares **chave: valor**.
 
-## Criar e aceder a um dicionÃ¡rio
+## Criar e aceder a um dicionário
 
 \`\`\`python
 utilizador = {
@@ -564,11 +564,11 @@ utilizador = {
     "ativo": True,
 }
 
-print(utilizador["nome"])       # "Sofia" (acesso por chave, com parÃªnteses retos)
-print(utilizador.get("idade"))  # 22 (forma mais segura: nÃ£o dÃ¡ erro se a chave nÃ£o existir)
+print(utilizador["nome"])       # "Sofia" (acesso por chave, com parênteses retos)
+print(utilizador.get("idade"))  # 22 (forma mais segura: não dá erro se a chave não existir)
 \`\`\`
 
-Ao contrÃ¡rio do JavaScript (que tem notaÃ§Ã£o de ponto \`objeto.propriedade\`), em Python acede-se **sempre** com parÃªnteses retos \`dicionario["chave"]\`, ou com o mÃ©todo \`.get()\`.
+Ao contrário do JavaScript (que tem notação de ponto \`objeto.propriedade\`), em Python acede-se **sempre** com parênteses retos \`dicionario["chave"]\`, ou com o método \`.get()\`.
 
 ## Alterar e adicionar entradas
 
@@ -578,7 +578,7 @@ utilizador["cidade"] = "Aveiro"  # adiciona uma entrada nova
 del utilizador["ativo"]          # remove uma entrada
 \`\`\`
 
-## Percorrer um dicionÃ¡rio
+## Percorrer um dicionário
 
 \`\`\`python
 utilizador = {"nome": "Sofia", "idade": 22}
@@ -599,26 +599,26 @@ utilizador = {"nome": "Sofia"}
 if "idade" in utilizador:
     print("Tem idade definida")
 else:
-    print("NÃ£o tem idade definida")
+    print("Não tem idade definida")
 \`\`\`
 
-## DicionÃ¡rios com listas (e vice-versa)
+## Dicionários com listas (e vice-versa)
 
 \`\`\`python
 modulo = {
-    "titulo": "DicionÃ¡rios",
-    "perguntas": ["O que Ã© um dicionÃ¡rio?", "Como aceder a um valor?"],
+    "titulo": "Dicionários",
+    "perguntas": ["O que é um dicionário?", "Como aceder a um valor?"],
 }
 
-print(modulo["perguntas"][0])       # "O que Ã© um dicionÃ¡rio?"
+print(modulo["perguntas"][0])       # "O que é um dicionário?"
 print(len(modulo["perguntas"]))     # 2
 \`\`\`
 
-Ã‰ muito comum, em programas reais, teres listas de dicionÃ¡rios â€” por exemplo, uma lista de utilizadores, cada um com nome, email e XP.
+É muito comum, em programas reais, teres listas de dicionários — por exemplo, uma lista de utilizadores, cada um com nome, email e XP.
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Cria um dicionÃ¡rio \`jogador\` com as chaves \`nome\`, \`xp\` e \`nivel\`. Escreve uma funÃ§Ã£o \`ganhar_xp(jogador, quantidade)\` que soma XP ao dicionÃ¡rio do jogador e mostra o novo total com \`print()\`.`,
+Cria um dicionário \`jogador\` com as chaves \`nome\`, \`xp\` e \`nivel\`. Escreve uma função \`ganhar_xp(jogador, quantidade)\` que soma XP ao dicionário do jogador e mostra o novo total com \`print()\`.`,
   },
   {
     ordem: 10,
@@ -626,13 +626,13 @@ Cria um dicionÃ¡rio \`jogador\` com as chaves \`nome\`, \`xp\` e \`nivel\`. Es
     descricao: 'Como lidar com erros de forma controlada com try/except.',
     conteudo: `# Tratamento de Erros em Python
 
-Nem sempre o cÃ³digo corre como esperado â€” um utilizador pode inserir texto onde se esperava um nÃºmero, um ficheiro pode nÃ£o existir, uma divisÃ£o pode ser por zero. Python usa **exceÃ§Ãµes** para lidar com estas situaÃ§Ãµes de forma controlada.
+Nem sempre o código corre como esperado — um utilizador pode inserir texto onde se esperava um número, um ficheiro pode não existir, uma divisão pode ser por zero. Python usa **exceções** para lidar com estas situações de forma controlada.
 
 ## O que acontece sem tratamento de erros
 
 \`\`\`python
-numero = int("abc")  # ValueError: nÃ£o Ã© possÃ­vel converter "abc" para nÃºmero
-print("Esta linha nunca Ã© executada")
+numero = int("abc")  # ValueError: não é possível converter "abc" para número
+print("Esta linha nunca é executada")
 \`\`\`
 
 Sem tratamento, um erro deste tipo interrompe o programa por completo.
@@ -641,24 +641,24 @@ Sem tratamento, um erro deste tipo interrompe o programa por completo.
 
 \`\`\`python
 try:
-    numero = int(input("Introduz um nÃºmero: "))
-    print("O dobro Ã©", numero * 2)
+    numero = int(input("Introduz um número: "))
+    print("O dobro é", numero * 2)
 except ValueError:
-    print("Isso nÃ£o Ã© um nÃºmero vÃ¡lido!")
+    print("Isso não é um número válido!")
 \`\`\`
 
-O cÃ³digo dentro do \`try\` Ã© executado normalmente; se ocorrer um erro do tipo indicado no \`except\`, o programa salta para esse bloco em vez de terminar.
+O código dentro do \`try\` é executado normalmente; se ocorrer um erro do tipo indicado no \`except\`, o programa salta para esse bloco em vez de terminar.
 
-## Apanhar vÃ¡rios tipos de erro
+## Apanhar vários tipos de erro
 
 \`\`\`python
 try:
     resultado = 10 / int(input("Divide por: "))
     print(resultado)
 except ValueError:
-    print("Introduz um nÃºmero vÃ¡lido.")
+    print("Introduz um número válido.")
 except ZeroDivisionError:
-    print("NÃ£o podes dividir por zero!")
+    print("Não podes dividir por zero!")
 \`\`\`
 
 ## else e finally
@@ -667,19 +667,19 @@ except ZeroDivisionError:
 try:
     numero = int("42")
 except ValueError:
-    print("Erro na conversÃ£o")
+    print("Erro na conversão")
 else:
-    print("ConversÃ£o feita com sucesso:", numero)  # sÃ³ corre se NÃƒO houve erro
+    print("Conversão feita com sucesso:", numero)  # só corre se NÃO houve erro
 finally:
     print("Isto corre sempre, com ou sem erro")
 \`\`\`
 
-## LanÃ§ar os teus prÃ³prios erros
+## Lançar os teus próprios erros
 
 \`\`\`python
 def levantar_idade(idade):
     if idade < 0:
-        raise ValueError("A idade nÃ£o pode ser negativa")
+        raise ValueError("A idade não pode ser negativa")
     return idade
 
 try:
@@ -688,35 +688,35 @@ except ValueError as erro:
     print("Erro:", erro)
 \`\`\`
 
-\`raise\` Ã© o equivalente Python ao \`throw\` do JavaScript.
+\`raise\` é o equivalente Python ao \`throw\` do JavaScript.
 
-## ExercÃ­cio proposto
+## Exercício proposto
 
-Escreve uma funÃ§Ã£o \`dividir(a, b)\` que devolva \`a / b\`, mas usa \`try/except\` para apanhar o erro \`ZeroDivisionError\` e devolver uma mensagem de erro amigÃ¡vel em vez de deixar o programa rebentar.`,
+Escreve uma função \`dividir(a, b)\` que devolva \`a / b\`, mas usa \`try/except\` para apanhar o erro \`ZeroDivisionError\` e devolver uma mensagem de erro amigável em vez de deixar o programa rebentar.`,
   },
 ];
 
 // ------------------------------------------------------------
-// Quizzes (5 perguntas por mÃ³dulo, 1 alternativa correta cada)
+// Quizzes (5 perguntas por módulo, 1 alternativa correta cada)
 // ------------------------------------------------------------
 const quizzes = [
   {
     moduloOrdem: 1,
-    titulo: 'Quiz: IntroduÃ§Ã£o ao Python',
+    titulo: 'Quiz: Introdução ao Python',
     perguntas: [
       {
-        enunciado: 'Como Ã© que o Python delimita blocos de cÃ³digo (em vez de chavetas)?',
-        explicacao: 'Python usa a indentaÃ§Ã£o (espaÃ§os no inÃ­cio da linha) para definir onde comeÃ§a e acaba um bloco de cÃ³digo.',
+        enunciado: 'Como é que o Python delimita blocos de código (em vez de chavetas)?',
+        explicacao: 'Python usa a indentação (espaços no início da linha) para definir onde começa e acaba um bloco de código.',
         alternativas: [
           { texto: 'Com chavetas {}', correta: false },
-          { texto: 'Com indentaÃ§Ã£o (espaÃ§os)', correta: true },
-          { texto: 'Com parÃªnteses ()', correta: false },
-          { texto: 'NÃ£o delimita, tudo corre em sequÃªncia', correta: false },
+          { texto: 'Com indentação (espaços)', correta: true },
+          { texto: 'Com parênteses ()', correta: false },
+          { texto: 'Não delimita, tudo corre em sequência', correta: false },
         ],
       },
       {
-        enunciado: 'Qual funÃ§Ã£o mostra texto na consola em Python?',
-        explicacao: '`print()` Ã© a funÃ§Ã£o usada para escrever valores na consola em Python.',
+        enunciado: 'Qual função mostra texto na consola em Python?',
+        explicacao: '`print()` é a função usada para escrever valores na consola em Python.',
         alternativas: [
           { texto: 'console.log()', correta: false },
           { texto: 'print()', correta: true },
@@ -725,44 +725,44 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Como se escreve um comentÃ¡rio de uma linha em Python?',
-        explicacao: 'O sÃ­mbolo `#` transforma o resto da linha num comentÃ¡rio, que o Python ignora ao executar.',
+        enunciado: 'Como se escreve um comentário de uma linha em Python?',
+        explicacao: 'O símbolo `#` transforma o resto da linha num comentário, que o Python ignora ao executar.',
         alternativas: [
-          { texto: '// comentÃ¡rio', correta: false },
-          { texto: '<!-- comentÃ¡rio -->', correta: false },
-          { texto: '# comentÃ¡rio', correta: true },
-          { texto: '** comentÃ¡rio **', correta: false },
+          { texto: '// comentário', correta: false },
+          { texto: '<!-- comentário -->', correta: false },
+          { texto: '# comentário', correta: true },
+          { texto: '** comentário **', correta: false },
         ],
       },
       {
-        enunciado: 'O que Ã© o Python, em termos de execuÃ§Ã£o do cÃ³digo?',
-        explicacao: 'O Python Ã© interpretado: um interpretador lÃª e executa o cÃ³digo linha a linha, sem precisar de compilaÃ§Ã£o prÃ©via.',
+        enunciado: 'O que é o Python, em termos de execução do código?',
+        explicacao: 'O Python é interpretado: um interpretador lê e executa o código linha a linha, sem precisar de compilação prévia.',
         alternativas: [
           { texto: 'Uma linguagem compilada, como o C', correta: false },
           { texto: 'Uma linguagem interpretada', correta: true },
-          { texto: 'Uma linguagem de marcaÃ§Ã£o, como o HTML', correta: false },
+          { texto: 'Uma linguagem de marcação, como o HTML', correta: false },
           { texto: 'Uma linguagem exclusiva para bases de dados', correta: false },
         ],
       },
       {
-        enunciado: 'O que acontece se misturares indentaÃ§Ãµes diferentes dentro do mesmo bloco em Python?',
-        explicacao: 'Todas as linhas de um mesmo bloco tÃªm de ter a mesma indentaÃ§Ã£o; misturar indentaÃ§Ãµes diferentes causa um erro.',
+        enunciado: 'O que acontece se misturares indentações diferentes dentro do mesmo bloco em Python?',
+        explicacao: 'Todas as linhas de um mesmo bloco têm de ter a mesma indentação; misturar indentações diferentes causa um erro.',
         alternativas: [
           { texto: 'O Python ajusta automaticamente', correta: false },
           { texto: 'Causa um erro', correta: true },
-          { texto: 'Ã‰ ignorado sem qualquer efeito', correta: false },
-          { texto: 'SÃ³ funciona se usares tabs, nunca espaÃ§os', correta: false },
+          { texto: 'É ignorado sem qualquer efeito', correta: false },
+          { texto: 'Só funciona se usares tabs, nunca espaços', correta: false },
         ],
       },
     ],
   },
   {
     moduloOrdem: 2,
-    titulo: 'Quiz: VariÃ¡veis em Python',
+    titulo: 'Quiz: Variáveis em Python',
     perguntas: [
       {
-        enunciado: 'Como se cria uma variÃ¡vel em Python?',
-        explicacao: 'Em Python basta atribuir um valor a um nome â€” nÃ£o Ã© preciso usar `let`, `const` ou `var` como em JavaScript.',
+        enunciado: 'Como se cria uma variável em Python?',
+        explicacao: 'Em Python basta atribuir um valor a um nome — não é preciso usar `let`, `const` ou `var` como em JavaScript.',
         alternativas: [
           { texto: 'let idade = 25', correta: false },
           { texto: 'var idade = 25', correta: false },
@@ -771,8 +771,8 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Qual Ã© a convenÃ§Ã£o de nomenclatura mais usada para variÃ¡veis em Python?',
-        explicacao: 'A convenÃ§Ã£o Python para nomes de variÃ¡veis Ã© snake_case (palavras separadas por underscore), ao contrÃ¡rio do camelCase do JavaScript.',
+        enunciado: 'Qual é a convenção de nomenclatura mais usada para variáveis em Python?',
+        explicacao: 'A convenção Python para nomes de variáveis é snake_case (palavras separadas por underscore), ao contrário do camelCase do JavaScript.',
         alternativas: [
           { texto: 'camelCase (nomeCompleto)', correta: false },
           { texto: 'snake_case (nome_completo)', correta: true },
@@ -782,32 +782,32 @@ const quizzes = [
       },
       {
         enunciado: 'O que faz `x, y, z = 1, 2, 3` em Python?',
-        explicacao: 'Esta Ã© a atribuiÃ§Ã£o mÃºltipla: atribui 1 a x, 2 a y e 3 a z, tudo numa sÃ³ linha.',
+        explicacao: 'Esta é a atribuição múltipla: atribui 1 a x, 2 a y e 3 a z, tudo numa só linha.',
         alternativas: [
           { texto: 'Cria uma lista [1, 2, 3]', correta: false },
-          { texto: 'DÃ¡ erro de sintaxe', correta: false },
+          { texto: 'Dá erro de sintaxe', correta: false },
           { texto: 'Atribui 1 a x, 2 a y e 3 a z', correta: true },
-          { texto: 'Atribui a mesma soma (6) Ã s trÃªs variÃ¡veis', correta: false },
+          { texto: 'Atribui a mesma soma (6) às três variáveis', correta: false },
         ],
       },
       {
-        enunciado: 'Como se sinaliza, por convenÃ§Ã£o, que uma variÃ¡vel nÃ£o devia ser alterada?',
-        explicacao: 'Python nÃ£o tem `const`; por convenÃ§Ã£o usa-se o nome todo em maiÃºsculas para sinalizar que nÃ£o devia mudar, mas isso nÃ£o Ã© imposto pela linguagem.',
+        enunciado: 'Como se sinaliza, por convenção, que uma variável não devia ser alterada?',
+        explicacao: 'Python não tem `const`; por convenção usa-se o nome todo em maiúsculas para sinalizar que não devia mudar, mas isso não é imposto pela linguagem.',
         alternativas: [
           { texto: 'Com a palavra-chave const', correta: false },
-          { texto: 'Escrevendo o nome todo em maiÃºsculas', correta: true },
-          { texto: 'NÃ£o Ã© possÃ­vel sinalizar isso de forma alguma', correta: false },
+          { texto: 'Escrevendo o nome todo em maiúsculas', correta: true },
+          { texto: 'Não é possível sinalizar isso de forma alguma', correta: false },
           { texto: 'Com a palavra-chave final', correta: false },
         ],
       },
       {
-        enunciado: 'Python Ã© sensÃ­vel a maiÃºsculas/minÃºsculas nos nomes de variÃ¡veis?',
-        explicacao: '`idade` e `Idade` sÃ£o consideradas duas variÃ¡veis diferentes em Python, tal como em JavaScript.',
+        enunciado: 'Python é sensível a maiúsculas/minúsculas nos nomes de variáveis?',
+        explicacao: '`idade` e `Idade` são consideradas duas variáveis diferentes em Python, tal como em JavaScript.',
         alternativas: [
-          { texto: 'Sim, "idade" e "Idade" sÃ£o variÃ¡veis diferentes', correta: true },
-          { texto: 'NÃ£o, maiÃºsculas e minÃºsculas sÃ£o tratadas da mesma forma', correta: false },
-          { texto: 'SÃ³ Ã© sensÃ­vel dentro de funÃ§Ãµes', correta: false },
-          { texto: 'Depende da versÃ£o do Python', correta: false },
+          { texto: 'Sim, "idade" e "Idade" são variáveis diferentes', correta: true },
+          { texto: 'Não, maiúsculas e minúsculas são tratadas da mesma forma', correta: false },
+          { texto: 'Só é sensível dentro de funções', correta: false },
+          { texto: 'Depende da versão do Python', correta: false },
         ],
       },
     ],
@@ -818,7 +818,7 @@ const quizzes = [
     perguntas: [
       {
         enunciado: 'Qual o resultado de `type(3.14)` em Python?',
-        explicacao: 'NÃºmeros com casas decimais sÃ£o do tipo `float` em Python, diferente de `int` (nÃºmeros inteiros).',
+        explicacao: 'Números com casas decimais são do tipo `float` em Python, diferente de `int` (números inteiros).',
         alternativas: [
           { texto: "<class 'int'>", correta: false },
           { texto: "<class 'float'>", correta: true },
@@ -827,28 +827,28 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Qual destas Ã© uma f-string vÃ¡lida que insere uma variÃ¡vel num texto?',
-        explicacao: 'As f-strings (com "f" antes das aspas) permitem inserir variÃ¡veis diretamente com `{}`.',
+        enunciado: 'Qual destas é uma f-string válida que insere uma variável num texto?',
+        explicacao: 'As f-strings (com "f" antes das aspas) permitem inserir variáveis diretamente com `{}`.',
         alternativas: [
-          { texto: '"OlÃ¡, " + nome + "!"', correta: false },
-          { texto: 'f"OlÃ¡, {nome}!"', correta: true },
-          { texto: '"OlÃ¡, %nome%!"', correta: false },
-          { texto: 'string.format("OlÃ¡, nome!")', correta: false },
+          { texto: '"Olá, " + nome + "!"', correta: false },
+          { texto: 'f"Olá, {nome}!"', correta: true },
+          { texto: '"Olá, %nome%!"', correta: false },
+          { texto: 'string.format("Olá, nome!")', correta: false },
         ],
       },
       {
         enunciado: 'O que acontece ao tentar correr `5 + "3"` em Python?',
-        explicacao: 'Ao contrÃ¡rio do JavaScript, o Python nÃ£o converte tipos automaticamente ao somar um nÃºmero com uma string â€” dÃ¡ erro (TypeError).',
+        explicacao: 'Ao contrário do JavaScript, o Python não converte tipos automaticamente ao somar um número com uma string — dá erro (TypeError).',
         alternativas: [
           { texto: 'Devolve 8', correta: false },
           { texto: 'Devolve "53"', correta: false },
-          { texto: 'DÃ¡ erro (TypeError)', correta: true },
+          { texto: 'Dá erro (TypeError)', correta: true },
           { texto: 'Devolve None', correta: false },
         ],
       },
       {
-        enunciado: 'Qual Ã© o valor usado em Python para representar "sem valor" (equivalente a null/undefined)?',
-        explicacao: 'Python usa apenas `None` para representar ausÃªncia de valor, sem distinguir null de undefined como o JavaScript.',
+        enunciado: 'Qual é o valor usado em Python para representar "sem valor" (equivalente a null/undefined)?',
+        explicacao: 'Python usa apenas `None` para representar ausência de valor, sem distinguir null de undefined como o JavaScript.',
         alternativas: [
           { texto: 'null', correta: false },
           { texto: 'undefined', correta: false },
@@ -857,8 +857,8 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Como se converte a string "25" para o nÃºmero 25 em Python?',
-        explicacao: '`int()` converte um valor compatÃ­vel para o tipo inteiro.',
+        enunciado: 'Como se converte a string "25" para o número 25 em Python?',
+        explicacao: '`int()` converte um valor compatível para o tipo inteiro.',
         alternativas: [
           { texto: 'str("25")', correta: false },
           { texto: 'int("25")', correta: true },
@@ -874,7 +874,7 @@ const quizzes = [
     perguntas: [
       {
         enunciado: 'Qual o resultado de `10 // 3` em Python?',
-        explicacao: 'O operador `//` Ã© a divisÃ£o inteira: arredonda sempre para baixo, por isso 10 // 3 dÃ¡ 3.',
+        explicacao: 'O operador `//` é a divisão inteira: arredonda sempre para baixo, por isso 10 // 3 dá 3.',
         alternativas: [
           { texto: '3.33', correta: false },
           { texto: '3', correta: true },
@@ -883,8 +883,8 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Como se escreve o operador lÃ³gico "E" (AND) em Python?',
-        explicacao: 'Em Python, os operadores lÃ³gicos escrevem-se por extenso: `and`, `or` e `not`, em vez de sÃ­mbolos como `&&`.',
+        enunciado: 'Como se escreve o operador lógico "E" (AND) em Python?',
+        explicacao: 'Em Python, os operadores lógicos escrevem-se por extenso: `and`, `or` e `not`, em vez de símbolos como `&&`.',
         alternativas: [
           { texto: '&&', correta: false },
           { texto: 'and', correta: true },
@@ -894,17 +894,17 @@ const quizzes = [
       },
       {
         enunciado: 'O que acontece com `5 == "5"` em Python?',
-        explicacao: 'Ao contrÃ¡rio do `==` em JavaScript, o `==` do Python nÃ£o converte tipos: um int nunca Ã© igual a uma string com o mesmo dÃ­gito.',
+        explicacao: 'Ao contrário do `==` em JavaScript, o `==` do Python não converte tipos: um int nunca é igual a uma string com o mesmo dígito.',
         alternativas: [
-          { texto: 'True, porque o valor Ã© o mesmo', correta: false },
-          { texto: 'False, porque os tipos sÃ£o diferentes', correta: true },
-          { texto: 'DÃ¡ erro de sintaxe', correta: false },
-          { texto: 'Depende da versÃ£o do Python', correta: false },
+          { texto: 'True, porque o valor é o mesmo', correta: false },
+          { texto: 'False, porque os tipos são diferentes', correta: true },
+          { texto: 'Dá erro de sintaxe', correta: false },
+          { texto: 'Depende da versão do Python', correta: false },
         ],
       },
       {
-        enunciado: 'Qual Ã© o resultado de `pontos += 5` se `pontos` valia 10?',
-        explicacao: '`+=` Ã© um atalho para `pontos = pontos + 5`, logo o novo valor Ã© 15, tal como em JavaScript.',
+        enunciado: 'Qual é o resultado de `pontos += 5` se `pontos` valia 10?',
+        explicacao: '`+=` é um atalho para `pontos = pontos + 5`, logo o novo valor é 15, tal como em JavaScript.',
         alternativas: [
           { texto: '5', correta: false },
           { texto: '10', correta: false },
@@ -914,11 +914,11 @@ const quizzes = [
       },
       {
         enunciado: 'Python tem um operador equivalente ao `===` do JavaScript?',
-        explicacao: 'NÃ£o Ã© necessÃ¡rio: o `==` do Python jÃ¡ compara sempre valor e tipo, sem conversÃµes implÃ­citas, por isso nÃ£o existe uma versÃ£o "estrita" separada.',
+        explicacao: 'Não é necessário: o `==` do Python já compara sempre valor e tipo, sem conversões implícitas, por isso não existe uma versão "estrita" separada.',
         alternativas: [
           { texto: 'Sim, chama-se ===', correta: false },
           { texto: 'Sim, chama-se is', correta: false },
-          { texto: 'NÃ£o Ã© necessÃ¡rio, o == jÃ¡ compara valor e tipo', correta: true },
+          { texto: 'Não é necessário, o == já compara valor e tipo', correta: true },
           { texto: 'Sim, chama-se equals()', correta: false },
         ],
       },
@@ -929,8 +929,8 @@ const quizzes = [
     titulo: 'Quiz: Condicionais em Python',
     perguntas: [
       {
-        enunciado: 'Como se escreve "senÃ£o se" em Python?',
-        explicacao: 'Python usa a palavra-chave `elif`, contraÃ§Ã£o de "else if".',
+        enunciado: 'Como se escreve "senão se" em Python?',
+        explicacao: 'Python usa a palavra-chave `elif`, contração de "else if".',
         alternativas: [
           { texto: 'else if', correta: false },
           { texto: 'elseif', correta: false },
@@ -939,43 +939,43 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'O que Ã© obrigatÃ³rio no final da linha de um `if` em Python?',
+        enunciado: 'O que é obrigatório no final da linha de um `if` em Python?',
         explicacao: 'A linha do `if` (e de `elif`, `else`, `for`, `while`, `def`) termina sempre com dois pontos `:`.',
         alternativas: [
           { texto: 'Uma chaveta {', correta: false },
-          { texto: 'Um ponto e vÃ­rgula ;', correta: false },
+          { texto: 'Um ponto e vírgula ;', correta: false },
           { texto: 'Dois pontos :', correta: true },
-          { texto: 'Nada, a linha termina sem sÃ­mbolo', correta: false },
+          { texto: 'Nada, a linha termina sem símbolo', correta: false },
         ],
       },
       {
-        enunciado: 'Python tem uma instruÃ§Ã£o `switch` tradicional?',
-        explicacao: 'Nas versÃµes mais usadas em contexto de aprendizagem, o Python nÃ£o tem `switch` â€” usa-se uma sequÃªncia de `if/elif` como alternativa.',
+        enunciado: 'Python tem uma instrução `switch` tradicional?',
+        explicacao: 'Nas versões mais usadas em contexto de aprendizagem, o Python não tem `switch` — usa-se uma sequência de `if/elif` como alternativa.',
         alternativas: [
           { texto: 'Sim, igual ao JavaScript', correta: false },
-          { texto: 'NÃ£o, usa-se if/elif como alternativa', correta: true },
+          { texto: 'Não, usa-se if/elif como alternativa', correta: true },
           { texto: 'Sim, mas chama-se case', correta: false },
-          { texto: 'SÃ³ existe dentro de funÃ§Ãµes', correta: false },
+          { texto: 'Só existe dentro de funções', correta: false },
         ],
       },
       {
         enunciado: 'O que devolve `"adulto" if idade >= 18 else "menor"` se `idade = 20`?',
-        explicacao: 'Esta Ã© a expressÃ£o condicional numa linha do Python; como 20 >= 18 Ã© verdadeiro, devolve "adulto".',
+        explicacao: 'Esta é a expressão condicional numa linha do Python; como 20 >= 18 é verdadeiro, devolve "adulto".',
         alternativas: [
           { texto: '"menor"', correta: false },
           { texto: '"adulto"', correta: true },
           { texto: 'True', correta: false },
-          { texto: 'DÃ¡ erro de sintaxe', correta: false },
+          { texto: 'Dá erro de sintaxe', correta: false },
         ],
       },
       {
-        enunciado: 'Quantos blocos de um `if/elif/elif/else` podem ser executados numa sÃ³ verificaÃ§Ã£o?',
-        explicacao: 'Tal como no JavaScript, apenas o primeiro bloco cuja condiÃ§Ã£o for verdadeira Ã© executado; os restantes sÃ£o ignorados.',
+        enunciado: 'Quantos blocos de um `if/elif/elif/else` podem ser executados numa só verificação?',
+        explicacao: 'Tal como no JavaScript, apenas o primeiro bloco cuja condição for verdadeira é executado; os restantes são ignorados.',
         alternativas: [
-          { texto: 'Todos os blocos cuja condiÃ§Ã£o seja verdadeira', correta: false },
-          { texto: 'Apenas o primeiro bloco cuja condiÃ§Ã£o for verdadeira', correta: true },
+          { texto: 'Todos os blocos cuja condição seja verdadeira', correta: false },
+          { texto: 'Apenas o primeiro bloco cuja condição for verdadeira', correta: true },
           { texto: 'Sempre todos os blocos, um a seguir ao outro', correta: false },
-          { texto: 'Nenhum, Ã© preciso usar match para isso', correta: false },
+          { texto: 'Nenhum, é preciso usar match para isso', correta: false },
         ],
       },
     ],
@@ -986,27 +986,27 @@ const quizzes = [
     perguntas: [
       {
         enunciado: 'O que gera `range(5)` em Python?',
-        explicacao: '`range(5)` gera os nÃºmeros de 0 a 4 (5 nÃºmeros, comeÃ§ando em 0).',
+        explicacao: '`range(5)` gera os números de 0 a 4 (5 números, começando em 0).',
         alternativas: [
-          { texto: 'Os nÃºmeros de 1 a 5', correta: false },
-          { texto: 'Os nÃºmeros de 0 a 4', correta: true },
-          { texto: 'Os nÃºmeros de 0 a 5', correta: false },
+          { texto: 'Os números de 1 a 5', correta: false },
+          { texto: 'Os números de 0 a 4', correta: true },
+          { texto: 'Os números de 0 a 5', correta: false },
           { texto: 'Uma lista vazia', correta: false },
         ],
       },
       {
-        enunciado: 'Python tem uma instruÃ§Ã£o `do...while` nativa?',
-        explicacao: 'Python nÃ£o tem `do...while` â€” para simular "executa pelo menos uma vez", usa-se `while True` com um `break` condicional.',
+        enunciado: 'Python tem uma instrução `do...while` nativa?',
+        explicacao: 'Python não tem `do...while` — para simular "executa pelo menos uma vez", usa-se `while True` com um `break` condicional.',
         alternativas: [
           { texto: 'Sim, igual ao JavaScript', correta: false },
-          { texto: 'NÃ£o, simula-se com while True e break', correta: true },
+          { texto: 'Não, simula-se com while True e break', correta: true },
           { texto: 'Sim, mas chama-se repeat', correta: false },
-          { texto: 'SÃ³ existe em versÃµes antigas do Python', correta: false },
+          { texto: 'Só existe em versões antigas do Python', correta: false },
         ],
       },
       {
         enunciado: 'Como se percorre diretamente cada elemento de uma lista em Python?',
-        explicacao: '`for elemento in lista` dÃ¡ acesso direto a cada valor, sem precisares de um Ã­ndice.',
+        explicacao: '`for elemento in lista` dá acesso direto a cada valor, sem precisares de um índice.',
         alternativas: [
           { texto: 'for (let i = 0; i < lista.length; i++)', correta: false },
           { texto: 'for elemento in lista:', correta: true },
@@ -1016,17 +1016,17 @@ const quizzes = [
       },
       {
         enunciado: 'O que faz `continue` dentro de um ciclo em Python?',
-        explicacao: '`continue` salta o resto do cÃ³digo dessa iteraÃ§Ã£o e avanÃ§a diretamente para a prÃ³xima, tal como em JavaScript.',
+        explicacao: '`continue` salta o resto do código dessa iteração e avança diretamente para a próxima, tal como em JavaScript.',
         alternativas: [
           { texto: 'Termina o ciclo por completo', correta: false },
-          { texto: 'Salta para a prÃ³xima iteraÃ§Ã£o', correta: true },
-          { texto: 'Reinicia a variÃ¡vel de controlo', correta: false },
-          { texto: 'SÃ³ funciona dentro de uma funÃ§Ã£o', correta: false },
+          { texto: 'Salta para a próxima iteração', correta: true },
+          { texto: 'Reinicia a variável de controlo', correta: false },
+          { texto: 'Só funciona dentro de uma função', correta: false },
         ],
       },
       {
         enunciado: 'O que gera `range(0, 10, 2)`?',
-        explicacao: 'O terceiro argumento de `range()` Ã© o "passo" â€” aqui gera 0, 2, 4, 6, 8 (de 2 em 2, atÃ© antes de 10).',
+        explicacao: 'O terceiro argumento de `range()` é o "passo" — aqui gera 0, 2, 4, 6, 8 (de 2 em 2, até antes de 10).',
         alternativas: [
           { texto: '0, 1, 2, ..., 10', correta: false },
           { texto: '0, 2, 4, 6, 8', correta: true },
@@ -1038,11 +1038,11 @@ const quizzes = [
   },
   {
     moduloOrdem: 7,
-    titulo: 'Quiz: FunÃ§Ãµes em Python',
+    titulo: 'Quiz: Funções em Python',
     perguntas: [
       {
-        enunciado: 'Qual palavra-chave define uma funÃ§Ã£o em Python?',
-        explicacao: '`def` Ã© a palavra-chave usada para definir uma funÃ§Ã£o em Python.',
+        enunciado: 'Qual palavra-chave define uma função em Python?',
+        explicacao: '`def` é a palavra-chave usada para definir uma função em Python.',
         alternativas: [
           { texto: 'function', correta: false },
           { texto: 'def', correta: true },
@@ -1051,28 +1051,28 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'O que devolve uma funÃ§Ã£o Python que nÃ£o tem `return`?',
-        explicacao: 'Sem `return`, uma funÃ§Ã£o em Python devolve `None`, o equivalente ao `undefined` do JavaScript.',
+        enunciado: 'O que devolve uma função Python que não tem `return`?',
+        explicacao: 'Sem `return`, uma função em Python devolve `None`, o equivalente ao `undefined` do JavaScript.',
         alternativas: [
-          { texto: 'DÃ¡ sempre erro', correta: false },
+          { texto: 'Dá sempre erro', correta: false },
           { texto: 'None', correta: true },
           { texto: '0', correta: false },
           { texto: 'Uma string vazia', correta: false },
         ],
       },
       {
-        enunciado: 'O que sÃ£o "keyword arguments" em Python?',
-        explicacao: 'Keyword arguments permitem passar argumentos indicando o nome do parÃ¢metro, em qualquer ordem â€” algo sem equivalente direto no JavaScript.',
+        enunciado: 'O que são "keyword arguments" em Python?',
+        explicacao: 'Keyword arguments permitem passar argumentos indicando o nome do parâmetro, em qualquer ordem — algo sem equivalente direto no JavaScript.',
         alternativas: [
           { texto: 'Argumentos passados por nome, em qualquer ordem', correta: true },
-          { texto: 'Palavras reservadas que nÃ£o podem ser parÃ¢metros', correta: false },
-          { texto: 'Argumentos que sÃ³ aceitam texto', correta: false },
+          { texto: 'Palavras reservadas que não podem ser parâmetros', correta: false },
+          { texto: 'Argumentos que só aceitam texto', correta: false },
           { texto: 'Um tipo de erro de sintaxe', correta: false },
         ],
       },
       {
-        enunciado: 'Qual destas Ã© uma funÃ§Ã£o lambda vÃ¡lida que soma dois nÃºmeros?',
-        explicacao: 'As funÃ§Ãµes lambda usam a sintaxe `lambda parametros: expressao`, sem `def` nem `return`.',
+        enunciado: 'Qual destas é uma função lambda válida que soma dois números?',
+        explicacao: 'As funções lambda usam a sintaxe `lambda parametros: expressao`, sem `def` nem `return`.',
         alternativas: [
           { texto: 'lambda a, b: a + b', correta: true },
           { texto: 'lambda(a, b) => a + b', correta: false },
@@ -1081,13 +1081,13 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Qual Ã© uma limitaÃ§Ã£o das funÃ§Ãµes lambda em Python?',
-        explicacao: 'Uma lambda sÃ³ pode conter uma Ãºnica expressÃ£o â€” para lÃ³gica mais complexa (vÃ¡rias linhas, condiÃ§Ãµes, ciclos), tens de usar `def`.',
+        enunciado: 'Qual é uma limitação das funções lambda em Python?',
+        explicacao: 'Uma lambda só pode conter uma única expressão — para lógica mais complexa (várias linhas, condições, ciclos), tens de usar `def`.',
         alternativas: [
-          { texto: 'NÃ£o podem receber parÃ¢metros', correta: false },
-          { texto: 'SÃ³ podem ter uma expressÃ£o', correta: true },
-          { texto: 'NÃ£o podem ser guardadas numa variÃ¡vel', correta: false },
-          { texto: 'SÃ³ funcionam com nÃºmeros', correta: false },
+          { texto: 'Não podem receber parâmetros', correta: false },
+          { texto: 'Só podem ter uma expressão', correta: true },
+          { texto: 'Não podem ser guardadas numa variável', correta: false },
+          { texto: 'Só funcionam com números', correta: false },
         ],
       },
     ],
@@ -1097,17 +1097,17 @@ const quizzes = [
     titulo: 'Quiz: Listas em Python',
     perguntas: [
       {
-        enunciado: 'O que devolve `frutas[-1]` se `frutas = ["maÃ§Ã£", "banana", "pera"]`?',
-        explicacao: 'Ãndices negativos contam a partir do fim da lista; `-1` Ã© sempre o Ãºltimo elemento, neste caso "pera".',
+        enunciado: 'O que devolve `frutas[-1]` se `frutas = ["maçã", "banana", "pera"]`?',
+        explicacao: 'Índices negativos contam a partir do fim da lista; `-1` é sempre o último elemento, neste caso "pera".',
         alternativas: [
-          { texto: '"maÃ§Ã£"', correta: false },
+          { texto: '"maçã"', correta: false },
           { texto: '"banana"', correta: false },
           { texto: '"pera"', correta: true },
-          { texto: 'DÃ¡ erro', correta: false },
+          { texto: 'Dá erro', correta: false },
         ],
       },
       {
-        enunciado: 'Qual mÃ©todo adiciona um elemento ao FIM de uma lista em Python?',
+        enunciado: 'Qual método adiciona um elemento ao FIM de uma lista em Python?',
         explicacao: '`.append()` adiciona um elemento ao final da lista.',
         alternativas: [
           { texto: '.append()', correta: true },
@@ -1118,17 +1118,17 @@ const quizzes = [
       },
       {
         enunciado: 'O que devolve `[n * 2 for n in [1, 2, 3]]`?',
-        explicacao: 'Isto Ã© uma list comprehension, equivalente ao `.map()` do JavaScript: devolve uma nova lista com cada elemento multiplicado por 2.',
+        explicacao: 'Isto é uma list comprehension, equivalente ao `.map()` do JavaScript: devolve uma nova lista com cada elemento multiplicado por 2.',
         alternativas: [
           { texto: '[1, 2, 3]', correta: false },
           { texto: '[2, 4, 6]', correta: true },
           { texto: '6', correta: false },
-          { texto: 'DÃ¡ erro de sintaxe', correta: false },
+          { texto: 'Dá erro de sintaxe', correta: false },
         ],
       },
       {
         enunciado: 'O que devolve `numeros[1:4]` se `numeros = [0, 1, 2, 3, 4, 5]`?',
-        explicacao: 'O "slicing" `[1:4]` devolve os elementos do Ã­ndice 1 atÃ© ao 3 (sem incluir o Ã­ndice 4): [1, 2, 3].',
+        explicacao: 'O "slicing" `[1:4]` devolve os elementos do índice 1 até ao 3 (sem incluir o índice 4): [1, 2, 3].',
         alternativas: [
           { texto: '[1, 2, 3]', correta: true },
           { texto: '[1, 2, 3, 4]', correta: false },
@@ -1137,12 +1137,12 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Qual a diferenÃ§a entre `.remove(2)` e `.pop(2)` numa lista?',
-        explicacao: '`.remove(valor)` remove a primeira ocorrÃªncia desse VALOR; `.pop(indice)` remove o elemento nessa POSIÃ‡ÃƒO.',
+        enunciado: 'Qual a diferença entre `.remove(2)` e `.pop(2)` numa lista?',
+        explicacao: '`.remove(valor)` remove a primeira ocorrência desse VALOR; `.pop(indice)` remove o elemento nessa POSIÇÃO.',
         alternativas: [
-          { texto: 'NÃ£o hÃ¡ diferenÃ§a nenhuma', correta: false },
-          { texto: '.remove() apaga por valor; .pop() apaga por Ã­ndice', correta: true },
-          { texto: '.remove() sÃ³ funciona com nÃºmeros', correta: false },
+          { texto: 'Não há diferença nenhuma', correta: false },
+          { texto: '.remove() apaga por valor; .pop() apaga por índice', correta: true },
+          { texto: '.remove() só funciona com números', correta: false },
           { texto: '.pop() apaga a lista toda', correta: false },
         ],
       },
@@ -1150,21 +1150,21 @@ const quizzes = [
   },
   {
     moduloOrdem: 9,
-    titulo: 'Quiz: DicionÃ¡rios em Python',
+    titulo: 'Quiz: Dicionários em Python',
     perguntas: [
       {
-        enunciado: 'Como se organiza a informaÃ§Ã£o dentro de um dicionÃ¡rio em Python?',
-        explicacao: 'Um dicionÃ¡rio organiza dados em pares chave: valor, tal como um objeto em JavaScript.',
+        enunciado: 'Como se organiza a informação dentro de um dicionário em Python?',
+        explicacao: 'Um dicionário organiza dados em pares chave: valor, tal como um objeto em JavaScript.',
         alternativas: [
           { texto: 'Em pares chave: valor', correta: true },
-          { texto: 'SÃ³ por posiÃ§Ã£o, como uma lista', correta: false },
-          { texto: 'SÃ³ pode guardar nÃºmeros', correta: false },
+          { texto: 'Só por posição, como uma lista', correta: false },
+          { texto: 'Só pode guardar números', correta: false },
           { texto: 'Em linhas e colunas, como uma tabela', correta: false },
         ],
       },
       {
         enunciado: 'Dado `pessoa = {"nome": "Rui"}`, como acedemos ao nome?',
-        explicacao: 'Em Python, acede-se sempre a um dicionÃ¡rio com parÃªnteses retos: `pessoa["nome"]`.',
+        explicacao: 'Em Python, acede-se sempre a um dicionário com parênteses retos: `pessoa["nome"]`.',
         alternativas: [
           { texto: 'pessoa.nome', correta: false },
           { texto: 'pessoa["nome"]', correta: true },
@@ -1173,33 +1173,33 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Qual a vantagem de usar `.get("idade")` em vez de `["idade"]` num dicionÃ¡rio?',
-        explicacao: '`.get()` nÃ£o gera erro se a chave nÃ£o existir (devolve None por omissÃ£o); aceder com `[]` a uma chave inexistente causa um erro (KeyError).',
+        enunciado: 'Qual a vantagem de usar `.get("idade")` em vez de `["idade"]` num dicionário?',
+        explicacao: '`.get()` não gera erro se a chave não existir (devolve None por omissão); aceder com `[]` a uma chave inexistente causa um erro (KeyError).',
         alternativas: [
-          { texto: 'NÃ£o hÃ¡ vantagem nenhuma, sÃ£o idÃªnticos', correta: false },
-          { texto: '.get() nÃ£o dÃ¡ erro se a chave nÃ£o existir', correta: true },
-          { texto: '.get() sÃ³ funciona com nÃºmeros', correta: false },
-          { texto: '.get() Ã© mais lento mas mais seguro', correta: false },
+          { texto: 'Não há vantagem nenhuma, são idênticos', correta: false },
+          { texto: '.get() não dá erro se a chave não existir', correta: true },
+          { texto: '.get() só funciona com números', correta: false },
+          { texto: '.get() é mais lento mas mais seguro', correta: false },
         ],
       },
       {
-        enunciado: 'O que faz `.items()` num dicionÃ¡rio?',
+        enunciado: 'O que faz `.items()` num dicionário?',
         explicacao: '`.items()` devolve pares (chave, valor), permitindo percorrer ambos ao mesmo tempo num `for`.',
         alternativas: [
-          { texto: 'Devolve sÃ³ as chaves', correta: false },
-          { texto: 'Devolve sÃ³ os valores', correta: false },
+          { texto: 'Devolve só as chaves', correta: false },
+          { texto: 'Devolve só os valores', correta: false },
           { texto: 'Devolve pares (chave, valor)', correta: true },
           { texto: 'Apaga todas as entradas', correta: false },
         ],
       },
       {
-        enunciado: 'Como se remove uma entrada de um dicionÃ¡rio em Python?',
-        explicacao: 'A palavra-chave `del` remove uma entrada especÃ­fica de um dicionÃ¡rio pela sua chave.',
+        enunciado: 'Como se remove uma entrada de um dicionário em Python?',
+        explicacao: 'A palavra-chave `del` remove uma entrada específica de um dicionário pela sua chave.',
         alternativas: [
           { texto: 'dicionario.remove("chave")', correta: false },
           { texto: 'del dicionario["chave"]', correta: true },
           { texto: 'dicionario["chave"] = remove', correta: false },
-          { texto: 'NÃ£o Ã© possÃ­vel remover entradas', correta: false },
+          { texto: 'Não é possível remover entradas', correta: false },
         ],
       },
     ],
@@ -1210,17 +1210,17 @@ const quizzes = [
     perguntas: [
       {
         enunciado: 'O que acontece a um programa Python quando ocorre um erro sem tratamento?',
-        explicacao: 'Sem um bloco try/except, um erro (exceÃ§Ã£o) interrompe o programa por completo.',
+        explicacao: 'Sem um bloco try/except, um erro (exceção) interrompe o programa por completo.',
         alternativas: [
           { texto: 'O programa continua normalmente, ignorando o erro', correta: false },
-          { texto: 'O programa Ã© interrompido', correta: true },
-          { texto: 'O erro Ã© corrigido automaticamente', correta: false },
+          { texto: 'O programa é interrompido', correta: true },
+          { texto: 'O erro é corrigido automaticamente', correta: false },
           { texto: 'O Python reinicia o script sozinho', correta: false },
         ],
       },
       {
-        enunciado: 'Qual bloco contÃ©m o cÃ³digo que pode gerar um erro, em Python?',
-        explicacao: 'O cÃ³digo que pode falhar Ã© colocado dentro do bloco `try`; se ocorrer um erro do tipo indicado, salta para o `except` correspondente.',
+        enunciado: 'Qual bloco contém o código que pode gerar um erro, em Python?',
+        explicacao: 'O código que pode falhar é colocado dentro do bloco `try`; se ocorrer um erro do tipo indicado, salta para o `except` correspondente.',
         alternativas: [
           { texto: 'except', correta: false },
           { texto: 'try', correta: true },
@@ -1229,28 +1229,28 @@ const quizzes = [
         ],
       },
       {
-        enunciado: 'Quando Ã© que o bloco `else` de um try/except/else Ã© executado?',
-        explicacao: 'O bloco `else` sÃ³ corre se o `try` terminar SEM nenhum erro.',
+        enunciado: 'Quando é que o bloco `else` de um try/except/else é executado?',
+        explicacao: 'O bloco `else` só corre se o `try` terminar SEM nenhum erro.',
         alternativas: [
-          { texto: 'Sempre, independentemente de haver erro ou nÃ£o', correta: false },
-          { texto: 'SÃ³ se NÃƒO ocorrer nenhum erro no try', correta: true },
-          { texto: 'SÃ³ se ocorrer um erro no try', correta: false },
-          { texto: 'Nunca Ã© executado automaticamente', correta: false },
+          { texto: 'Sempre, independentemente de haver erro ou não', correta: false },
+          { texto: 'Só se NÃO ocorrer nenhum erro no try', correta: true },
+          { texto: 'Só se ocorrer um erro no try', correta: false },
+          { texto: 'Nunca é executado automaticamente', correta: false },
         ],
       },
       {
         enunciado: 'O que faz o bloco `finally` num try/except?',
-        explicacao: '`finally` executa sempre, quer tenha havido erro quer nÃ£o â€” Ã© usado tipicamente para libertar recursos.',
+        explicacao: '`finally` executa sempre, quer tenha havido erro quer não — é usado tipicamente para libertar recursos.',
         alternativas: [
-          { texto: 'SÃ³ corre se houver erro', correta: false },
-          { texto: 'SÃ³ corre se NÃƒO houver erro', correta: false },
+          { texto: 'Só corre se houver erro', correta: false },
+          { texto: 'Só corre se NÃO houver erro', correta: false },
           { texto: 'Corre sempre, com ou sem erro', correta: true },
           { texto: 'Substitui o bloco try', correta: false },
         ],
       },
       {
-        enunciado: 'Qual palavra-chave usas para lanÃ§ar um erro propositadamente em Python?',
-        explicacao: '`raise` Ã© o equivalente Python ao `throw` do JavaScript, usado para lanÃ§ar exceÃ§Ãµes manualmente.',
+        enunciado: 'Qual palavra-chave usas para lançar um erro propositadamente em Python?',
+        explicacao: '`raise` é o equivalente Python ao `throw` do JavaScript, usado para lançar exceções manualmente.',
         alternativas: [
           { texto: 'throw', correta: false },
           { texto: 'raise', correta: true },
@@ -1265,7 +1265,7 @@ const quizzes = [
 async function main() {
   const conn = await pool.getConnection();
   try {
-    console.log('A criar/atualizar mÃ³dulos de Python...');
+    console.log('A criar/atualizar módulos de Python...');
     for (const modulo of modulos) {
       const [[existente]] = await conn.query(
         'SELECT id FROM modulos WHERE titulo = ? AND linguagem = ?',
@@ -1285,19 +1285,19 @@ async function main() {
         );
         modulo.id = resultado.insertId;
       }
-      console.log(`  âœ“ ${modulo.titulo} (id=${modulo.id})`);
+      console.log(`  ✓ ${modulo.titulo} (id=${modulo.id})`);
     }
 
     console.log('A recriar quizzes de Python (5 perguntas cada)...');
     for (const quiz of quizzes) {
       const modulo = modulos.find((m) => m.ordem === quiz.moduloOrdem);
       if (!modulo) {
-        console.warn(`MÃ³dulo Python com ordem ${quiz.moduloOrdem} nÃ£o encontrado, a saltar.`);
+        console.warn(`Módulo Python com ordem ${quiz.moduloOrdem} não encontrado, a saltar.`);
         continue;
       }
       const moduloId = modulo.id;
 
-      // Remove quiz(zes) antigo(s) deste mÃ³dulo (cascata apaga perguntas/alternativas)
+      // Remove quiz(zes) antigo(s) deste módulo (cascata apaga perguntas/alternativas)
       await conn.query('DELETE FROM quizzes WHERE modulo_id = ?', [moduloId]);
 
       const [quizResult] = await conn.query(
@@ -1321,10 +1321,10 @@ async function main() {
           );
         }
       }
-      console.log(`  âœ“ ${quiz.titulo} (${quiz.perguntas.length} perguntas)`);
+      console.log(`  ✓ ${quiz.titulo} (${quiz.perguntas.length} perguntas)`);
     }
 
-    console.log('ConcluÃ­do com sucesso.');
+    console.log('Concluído com sucesso.');
   } finally {
     conn.release();
     await pool.end();
@@ -1332,7 +1332,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('Erro ao popular conteÃºdo Python:', err);
+  console.error('Erro ao popular conteúdo Python:', err);
   process.exit(1);
 });
-

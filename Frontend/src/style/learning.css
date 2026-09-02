@@ -243,6 +243,10 @@
     font-weight: 700;
 }
 
+.language-section-heading {
+  scroll-margin-top: 90px;
+}
+
 @media (max-width:640px) {
     .learning-hero {
         align-items: flex-start;

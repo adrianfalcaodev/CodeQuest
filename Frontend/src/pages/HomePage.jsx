@@ -19,21 +19,25 @@ export default function HomePage() {
   const { utilizador } = useAuth();
   const [stats, setStats] = useState(null);
   const [achievements, setAchievements] = useState([]);
+  const [modulos, setModulos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const [statsData, achievementsData] = await Promise.all([
+        const [statsData, achievementsData, modulosData] = await Promise.all([
           api.estatisticas(),
           api.listarConquistas(),
+          api.listarModulos(),
         ]);
 
         setStats(statsData);
         setAchievements(achievementsData || []);
+        setModulos(modulosData || []);
       } catch {
         setStats(null);
         setAchievements([]);
+        setModulos([]);
       } finally {
         setLoading(false);
       }
@@ -47,6 +51,15 @@ export default function HomePage() {
   const xp = stats?.xp ?? utilizador?.xp ?? 0;
   const streak = stats?.streakAtual ?? utilizador?.streak ?? 0;
   const completedModules = stats?.modulosConcluidos ?? 0;
+
+  const progressoPorLinguagem = useMemo(() => {
+    function calcular(linguagem) {
+      const doIdioma = modulos.filter((m) => m.linguagem === linguagem);
+      const concluidos = doIdioma.filter((m) => m.concluido).length;
+      return { concluidos, total: doIdioma.length };
+    }
+    return { javascript: calcular("JavaScript"), python: calcular("Python") };
+  }, [modulos]);
   const xpProgress = useMemo(() => {
     const nextLevelXp = stats?.proximoLimiarXp ?? 500;
     const currentLevelStart = Math.max(nextLevelXp - 500, 0);
@@ -61,18 +74,23 @@ export default function HomePage() {
   const missions = [
     {
       icon: <BookOpen />,
-      title: "Módulos concluídos",
-      detail: `${completedModules} módulos`,
-      progress: completedModules > 0 ? 100 : 0,
+      title: "JavaScript",
+      detail: `${progressoPorLinguagem.javascript.concluidos}/${progressoPorLinguagem.javascript.total} módulos`,
+      progress: progressoPorLinguagem.javascript.total
+        ? (progressoPorLinguagem.javascript.concluidos / progressoPorLinguagem.javascript.total) * 100
+        : 0,
       color: "green",
+      link: "/linguagem#javascript",
     },
     {
-      icon: <Zap />,
-      title: "Desafio relâmpago",
-      detail: "Quiz disponível",
-      progress: 0,
+      icon: <BookOpen />,
+      title: "Python",
+      detail: `${progressoPorLinguagem.python.concluidos}/${progressoPorLinguagem.python.total} módulos`,
+      progress: progressoPorLinguagem.python.total
+        ? (progressoPorLinguagem.python.concluidos / progressoPorLinguagem.python.total) * 100
+        : 0,
       color: "gold",
-      link: "/quiz",
+      link: "/linguagem#python",
     },
     {
       icon: <Trophy />,

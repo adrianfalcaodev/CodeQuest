@@ -11,10 +11,12 @@ import Button from "../components/button";
 import LoadingSpinner from "../components/LoadingSpinner";
 import EmptyState from "../components/EmptyState";
 import { getModuleById, markModuleAsStudied } from "../data/api.js";
+import { useAuth } from "../context/AuthContext.jsx";
 import "../style/learning.css";
 
 export default function ModuloPage() {
   const { moduleId } = useParams();
+  const { atualizarUtilizador } = useAuth();
   const [module, setModule] = useState(null);
   const [loading, setLoading] = useState(true);
   const [marking, setMarking] = useState(false);
@@ -33,6 +35,7 @@ export default function ModuloPage() {
     try {
       const result = await markModuleAsStudied(moduleId);
       setXpGanho(result.xpGanho || 0);
+      atualizarUtilizador({ nivel: result.nivel, xp: result.xp });
       setModule((current) => ({ ...current, estudado: true }));
     } catch (err) {
       setError(err?.message || "Erro ao marcar módulo como estudado.");

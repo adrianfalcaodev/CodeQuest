@@ -21,7 +21,7 @@ import "../style/gamification.css";
 export default function QuizPage() {
   const [searchParams] = useSearchParams();
   const moduleId = searchParams.get("moduleId");
-  const { utilizador } = useAuth();
+  const { utilizador, atualizarUtilizador } = useAuth();
   const { notificarGamificacao } = useNotificacao();
   const startedAt = useRef(null);
   const [questions, setQuestions] = useState([]);
@@ -78,6 +78,7 @@ export default function QuizPage() {
       const response = await submitQuiz(quizId, respostas, tempoGastoSegundos);
       setResult(response);
       notificarGamificacao(response);
+      atualizarUtilizador({ nivel: response.nivel, xp: response.xp });
     } catch (err) {
       setError(err?.message || "Não foi possível submeter o quiz.");
     } finally {

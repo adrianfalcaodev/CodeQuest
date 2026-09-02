@@ -6,7 +6,7 @@ import {
   Clock,
   Sparkles,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import EmptyState from "../components/EmptyState";
 import { getModules } from "../data/api.js";
@@ -17,6 +17,7 @@ export default function LinguagensPage() {
   const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const location = useLocation();
 
   useEffect(() => {
     getModules()
@@ -26,6 +27,16 @@ export default function LinguagensPage() {
       )
       .finally(() => setLoading(false));
   }, []);
+
+  // Depois de os módulos carregarem, se a URL trouxer uma âncora
+  // (ex: /linguagem#python), faz scroll até essa secção.
+  useEffect(() => {
+    if (loading || !location.hash) return;
+    const alvo = document.getElementById(location.hash.slice(1));
+    if (alvo) {
+      alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [loading, location.hash]);
 
   if (loading) return <LoadingSpinner />;
   if (error)
@@ -74,8 +85,11 @@ export default function LinguagensPage() {
         </span>
       </header>
       {Object.entries(groups).map(([language, languageModules]) => (
-        <section className="language-section" key={language}>
-          <div className="language-section-heading">
+        <section
+          className="language-section"
+          key={language}
+        >
+          <div className="language-section-heading" id={language.toLowerCase()}>
             <span>{language}</span>
             <small>
               {languageModules.filter((item) => item.concluido).length}/
