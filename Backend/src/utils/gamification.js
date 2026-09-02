@@ -149,6 +149,13 @@ export async function verificarConquistas(utilizadorId, contexto = {}, executor 
 
 async function cumpreCriterio(utilizadorId, conquista, contexto, executor = pool) {
   switch (conquista.criterio_tipo) {
+    case 'CRIAR_CONTA': {
+      // Basta a conta existir (esta função só é chamada para
+      // utilizadores já criados), pelo que o critério está sempre
+      // cumprido assim que é avaliado.
+      return true;
+    }
+
     case 'PRIMEIRO_LOGIN': {
       const [[{ ultimo_login }]] = await executor.query(
         'SELECT ultimo_login FROM utilizadores WHERE id = ?',
