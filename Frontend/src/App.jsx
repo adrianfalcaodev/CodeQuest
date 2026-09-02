@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext.jsx';
 import { NotificationProvider } from './context/NotificationContext.jsx';
 import Navbar from './components/Navbar.jsx';
@@ -20,7 +20,7 @@ import ConquistasPage from './pages/ConquistasPage';
 import ErrorPage from './pages/ErrorPage';
 
 function App() {
-  const { aCarregar } = useAuth();
+  const { aCarregar, estaAutenticado } = useAuth();
 
   if (aCarregar) {
     return <div className="ecra-carregar">A carregar...</div>;
@@ -32,7 +32,10 @@ function App() {
         <Navbar />
         <main className="app-content">
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route
+              path="/"
+              element={estaAutenticado ? <Navigate to="/homepage" replace /> : <LandingPage />}
+            />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registo" element={<RegistoPage />} />
             <Route path="/esqueceusenha" element={<EsqueceuPassPage />} />

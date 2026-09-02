@@ -20,25 +20,25 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [achievements, setAchievements] = useState([]);
-  const [modules, setModules] = useState([]);
+  const [modulos, setModulos] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const [statsData, achievementsData, modulesData] = await Promise.all([
+        const [statsData, achievementsData, modulosData] = await Promise.all([
           api.estatisticas(),
           api.listarConquistas(),
-          getModules(),
+          api.listarModulos(),
         ]);
 
         setStats(statsData);
         setAchievements(achievementsData || []);
-        setModules(Array.isArray(modulesData) ? modulesData : []);
+        setModulos(modulosData || []);
       } catch {
         setStats(null);
         setAchievements([]);
-        setModules([]);
+        setModulos([]);
       } finally {
         setLoading(false);
       }
@@ -52,6 +52,15 @@ export default function HomePage() {
   const xp = stats?.xp ?? utilizador?.xp ?? 0;
   const streak = stats?.streakAtual ?? utilizador?.streak ?? 0;
   const completedModules = stats?.modulosConcluidos ?? 0;
+
+  const progressoPorLinguagem = useMemo(() => {
+    function calcular(linguagem) {
+      const doIdioma = modulos.filter((m) => m.linguagem === linguagem);
+      const concluidos = doIdioma.filter((m) => m.concluido).length;
+      return { concluidos, total: doIdioma.length };
+    }
+    return { javascript: calcular("JavaScript"), python: calcular("Python") };
+  }, [modulos]);
   const xpProgress = useMemo(() => {
     const nextLevelXp = stats?.proximoLimiarXp ?? 500;
     const currentLevelStart = Math.max(nextLevelXp - 500, 0);
@@ -74,24 +83,23 @@ export default function HomePage() {
   const missions = [
     {
       icon: <BookOpen />,
-      title: "Javascript",
-      detail: `${completedModules} módulos`,
-      progress: completedModules > 0 ? 100 : 0,
+      title: "JavaScript",
+      detail: `${progressoPorLinguagem.javascript.concluidos}/${progressoPorLinguagem.javascript.total} módulos`,
+      progress: progressoPorLinguagem.javascript.total
+        ? (progressoPorLinguagem.javascript.concluidos / progressoPorLinguagem.javascript.total) * 100
+        : 0,
       color: "green",
-      action: () => {
-        if (nextModuleToStudy) {
-          navigate(`/modulo/${nextModuleToStudy.id}`);
-        }
-      },
+      link: "/linguagem#javascript",
     },
     {
-      icon: <Zap />,
+      icon: <BookOpen />,
       title: "Python",
-      detail: pythonModule ? `Quiz Python` : "Conclua um módulo Python",
-      progress: 0,
+      detail: `${progressoPorLinguagem.python.concluidos}/${progressoPorLinguagem.python.total} módulos`,
+      progress: progressoPorLinguagem.python.total
+        ? (progressoPorLinguagem.python.concluidos / progressoPorLinguagem.python.total) * 100
+        : 0,
       color: "gold",
-      link: pythonModule ? `/quiz` : null,
-      disabled: !pythonModule,
+      link: "/linguagem#python",
     },
     {
       icon: <Trophy />,
