@@ -9,15 +9,14 @@ import {
   Trophy,
   Zap,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
-import { api, getModules } from "../data/api.js";
+import { api } from "../data/api.js";
 import "../style/gamification.css";
 import "../style/dashboard.css";
 
 export default function HomePage() {
   const { utilizador } = useAuth();
-  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [achievements, setAchievements] = useState([]);
   const [modulos, setModulos] = useState([]);
@@ -72,13 +71,6 @@ export default function HomePage() {
     return Math.min(Math.max(percentage, 0), 100);
   }, [stats, xp]);
 
-  // Encontrar primeiro módulo não concluído ou último estudado
-  const nextModuleToStudy = modules.find((m) => !m.concluido && m.estudado) ||
-    modules.find((m) => !m.concluido) || 
-    modules[modules.length - 1];
-
-  // Encontrar módulo Python para o desafio
-  const pythonModule = modules.find((m) => m.linguagem === "Python" && m.concluido);
 
   const missions = [
     {
