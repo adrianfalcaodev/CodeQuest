@@ -109,6 +109,25 @@
     color: inherit;
 }
 
+.module-footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.module-status-text {
+    color: var(--primary-light);
+    font-size: .86rem;
+    font-weight: 700;
+}
+
+.module-acertos {
+    color: var(--secondary-light);
+    font-size: .75rem;
+    font-weight: 600;
+}
+
 .module-page {
     width: min(960px, 100%);
     margin: 0 auto;

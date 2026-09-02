@@ -1,0 +1,86 @@
+.lumen-mascote {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.lumen-balao {
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: #f0f4f8;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  max-width: 200px;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  border: 1px solid rgba(167, 139, 250, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: relative;
+  margin-right: 8px;
+}
+
+.lumen-balao.visivel {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Seta do balão apontando para a imagem */
+.lumen-balao::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 12px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 0 solid transparent;
+  border-top: 8px solid #7c3aed;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lumen-balao.visivel::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lumen-imagem {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.3));
+  transition: transform 0.3s ease;
+
+}
+
+.lumen-imagem:hover {
+  transform: scale(1.1);
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+  .lumen-mascote {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .lumen-balao {
+    max-width: 160px;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .lumen-imagem {
+    width: 50px;
+    height: 50px;
+  }
+}
