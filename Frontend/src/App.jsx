@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from './context/AuthContext.jsx';
 import { NotificationProvider } from './context/NotificationContext.jsx';
 import Navbar from './components/Navbar.jsx';
@@ -22,6 +22,8 @@ import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const { aCarregar, estaAutenticado } = useAuth();
+  const { pathname } = useLocation();
+  const mostrarLumen = !['/', '/login', '/registo', '/esqueceusenha'].includes(pathname);
 
   if (aCarregar) {
     return <div className="ecra-carregar">A carregar...</div>;
@@ -61,7 +63,7 @@ function App() {
         <footer className="app-footer">
           <span>© {new Date().getFullYear()} CodeQuest</span>
         </footer>
-        <LumenMascot />
+        {mostrarLumen && <LumenMascot />}
       </div>
     </NotificationProvider>
   );

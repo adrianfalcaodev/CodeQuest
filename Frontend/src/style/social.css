@@ -452,7 +452,7 @@
 }
 
 .achievement-list-scroll {
-    max-height: 400px;
+    max-height: 150px;
     overflow-y: auto;
     padding-right: 8px;
     margin-right: -8px;
@@ -528,6 +528,31 @@
     background: var(--gradient-primary);
 }
 
+.sobre-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.about-card {
+    display: flex;
+    min-width: 0;
+}
+
+.about-card .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+}
+
+.about-card .card-content {
+    flex: 1;
+}
+
 @media (max-width:760px) {
     .social-hero {
         align-items: flex-start;
@@ -579,6 +604,10 @@
 
     .profile-level {
         margin-left: 0;
+    }
+
+    .sobre-grid {
+        grid-template-columns: 1fr;
     }
 }
 

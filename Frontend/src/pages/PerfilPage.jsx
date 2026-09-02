@@ -4,7 +4,6 @@ import {
   Camera,
   Check,
   CheckCircle2,
-  Check,
   Flame,
   Pencil,
   Target,
@@ -16,7 +15,6 @@ import {
 import LoadingSpinner from "../components/LoadingSpinner";
 import EmptyState from "../components/EmptyState";
 import {
-  api,
   getAchievements,
   getProfile,
   getUserStats,
@@ -50,7 +48,7 @@ export default function PerfilPage() {
     Promise.all([getProfile(), getUserStats(), getAchievements()])
       .then(([profile, userStats, userAchievements]) => {
         setUser(profile);
-        setUsername(profile.username || "");
+        setNovoUsername(profile.username || "");
         setStats(userStats);
         setAchievements(userAchievements || []);
       })
@@ -227,40 +225,7 @@ export default function PerfilPage() {
           )}
         </div>
         <strong className="profile-level">Nível {nivel}</strong>
-        <button className="btn btn-sm profile-edit-button" type="button" onClick={iniciarEdicao}>
-          <Pencil size={16} /> Editar perfil
-        </button>
       </header>
-      {mensagem && <p className="profile-feedback is-success"><Check size={16} />{mensagem}</p>}
-      {editando && (
-        <form className="profile-panel profile-editor" onSubmit={guardarPerfil}>
-          <div className="profile-editor-heading">
-            <div>
-              <span className="social-kicker"><Pencil size={15} /> Dados públicos</span>
-              <h2>Editar perfil</h2>
-            </div>
-            <button className="btn btn-ghost btn-sm" type="button" onClick={() => setEditando(false)}>Cancelar</button>
-          </div>
-          <div className="profile-editor-fields">
-            <label>
-              Nome de utilizador
-              <input value={username} onChange={(event) => setUsername(event.target.value)} maxLength={50} required />
-            </label>
-            <div className="avatar-upload">
-              <span>Foto de perfil</span>
-              <button className="btn btn-ghost btn-sm" type="button" onClick={() => inputAvatar.current?.click()}>
-                <ImagePlus size={16} /> {ficheiro ? "Trocar foto" : "Escolher foto"}
-              </button>
-              <input ref={inputAvatar} className="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={selecionarAvatar} />
-              {ficheiro && <small>{ficheiro.name}</small>}
-            </div>
-          </div>
-          {erro && <p className="profile-feedback is-error">{erro}</p>}
-          <button className="btn btn-primary" type="submit" disabled={aGuardar}>
-            <Save size={16} /> {aGuardar ? "A guardar..." : "Guardar alterações"}
-          </button>
-        </form>
-      )}
       <div className="profile-stats">
         {cards.map(([Icon, value, label]) => (
           <article className="profile-stat" key={label}>
