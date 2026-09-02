@@ -137,7 +137,7 @@ export default function LinguagensPage() {
                     </span>
                     {temQuiz && (
                       <span className="module-acertos">
-                        {module.maxAcertos}/{module.totalPerguntas} acertos
+                        {module.maxAcertos}/{module.totalPerguntas} questões corretas!
                       </span>
                     )}
                   </div>
