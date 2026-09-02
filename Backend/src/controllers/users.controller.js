@@ -6,13 +6,24 @@ import { proximoLimiarXp } from '../utils/gamification.js';
 // RF04 - Editar perfil (username, avatar). O email/password têm
 // fluxos próprios (login/registo/recuperação).
 export async function editarPerfil(req, res) {
-  const { username, avatarUrl } = req.body;
+  const username = typeof req.body.username === 'string' ? req.body.username.trim() : req.body.username;
+  const { avatarUrl } = req.body;
   const utilizadorId = req.utilizador.id;
 
   const campos = [];
   const valores = [];
 
   if (username) {
+    if (username.length < 3 || username.length > 50) {
+      return res.status(400).json({ erro: 'O nome de utilizador deve ter entre 3 e 50 caracteres.' });
+    }
+    const [[existente]] = await pool.query(
+      'SELECT id FROM utilizadores WHERE username = ? AND id <> ?',
+      [username, utilizadorId]
+    );
+    if (existente) {
+      return res.status(409).json({ erro: 'Esse nome de utilizador já está em uso.' });
+    }
     campos.push('username = ?');
     valores.push(username);
   }
