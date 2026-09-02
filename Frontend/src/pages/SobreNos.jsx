@@ -1,7 +1,7 @@
 import { BookOpen, Users, Sparkles } from "lucide-react";
 import "../style/integration.css";
 import "../style/social.css";
-import Card from "../components/Card.jsx";
+import Card from "../components/card.jsx";
 
 export default function SobreNos() {
   return (
