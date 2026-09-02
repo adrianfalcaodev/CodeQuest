@@ -606,8 +606,10 @@ INSERT INTO `conquistas` (`id`, `nome`, `descricao`, `icone`, `criterio_tipo`, `
 (4,'100 Questões Respondidas','Respondeste a 100 questões.','brain','N_QUESTOES',100),
 (5,'7 Dias Consecutivos','Estudaste 7 dias seguidos.','flame','STREAK_DIAS',7),
 (6,'50 Dias Consecutivos','Estudaste 50 dias seguidos.','fire','STREAK_DIAS',50),
-(7,'Mestre das Variáveis','Nota máxima no quiz de Variáveis.','star','MODULO_PERFEITO',2),
-(8,'Mestre das Funções','Nota máxima no quiz de Funções.','star','MODULO_PERFEITO',7);
+(7,'Mestre das Variáveis - JavaScript','Nota máxima no quiz de Variáveis (JavaScript).','star','MODULO_PERFEITO',2),
+(8,'Mestre das Funções - JavaScript','Nota máxima no quiz de Funções (JavaScript).','star','MODULO_PERFEITO',7),
+(9,'Mestre das Variáveis - Python','Nota máxima no quiz de Variáveis em Python.','star','MODULO_PERFEITO',12),
+(10,'Mestre das Funções - Python','Nota máxima no quiz de Funções em Python.','star','MODULO_PERFEITO',17);
 /*!40000 ALTER TABLE `conquistas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
