@@ -8,15 +8,26 @@ export async function listarModulos(req, res) {
   const [modulos] = await pool.query(
     `SELECT m.id, m.titulo, m.descricao, m.linguagem, m.ordem,
             COALESCE(p.estudado, FALSE) AS estudado,
-            COALESCE(p.concluido, FALSE) AS concluido
+            COALESCE(p.concluido, FALSE) AS concluido,
+            perguntasPorQuiz.totalPerguntas,
+            COALESCE(melhorPorQuiz.maxAcertos, 0) AS maxAcertos
      FROM modulos m
      LEFT JOIN progresso_modulos p
        ON p.modulo_id = m.id AND p.utilizador_id = ?
+     LEFT JOIN quizzes qz ON qz.modulo_id = m.id
+     LEFT JOIN (
+       SELECT quiz_id, COUNT(*) AS totalPerguntas
+       FROM perguntas GROUP BY quiz_id
+     ) perguntasPorQuiz ON perguntasPorQuiz.quiz_id = qz.id
+     LEFT JOIN (
+       SELECT quiz_id, utilizador_id, MAX(acertos) AS maxAcertos
+       FROM tentativas_quiz GROUP BY quiz_id, utilizador_id
+     ) melhorPorQuiz ON melhorPorQuiz.quiz_id = qz.id AND melhorPorQuiz.utilizador_id = ?
      ORDER BY
        CASE m.linguagem WHEN 'JavaScript' THEN 1 WHEN 'Python' THEN 2 ELSE 99 END,
        m.linguagem,
        m.ordem`,
-    [utilizadorId]
+    [utilizadorId, utilizadorId]
   );
 
   res.json(modulos);
