@@ -1,5 +1,4 @@
 import { BookOpen, Users, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
 import "../style/integration.css";
 import "../style/social.css";
 
