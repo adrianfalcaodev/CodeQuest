@@ -760,7 +760,13 @@ tbody tr:hover {
   h2 { font-size: 1.5rem; }
   h3 { font-size: 1.25rem; }
 
-  .navbar-menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .navbar-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: -1;
+    margin-left: 0;
+  }
 
   .navbar-links {
     display: none;
