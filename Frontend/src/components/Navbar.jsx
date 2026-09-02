@@ -10,6 +10,7 @@ const links = [
   ["/ranking", "Ranking"],
   ["/conquistas", "Conquistas"],
   ["/perfil", "Perfil"],
+  ["/sobre", "Sobre"],
 ];
 
 export default function Navbar() {

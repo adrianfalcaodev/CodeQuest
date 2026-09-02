@@ -7,6 +7,7 @@ import LumenMascot from './components/LumenMascot.jsx';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegistoPage from './pages/ResgistoPage';
+import SobreNos from './pages/SobreNos';
 import HomePage from './pages/HomePage';
 import LinguagensPage from './pages/LinguagemPage';
 import QuizPage from './pages/QuizPage';
@@ -38,6 +39,7 @@ function App() {
             />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registo" element={<RegistoPage />} />
+            <Route path="/sobre" element={<SobreNos />} />
             <Route path="/esqueceusenha" element={<EsqueceuPassPage />} />
             <Route path="/redefinir-password" element={<ResetPassPage />} />
             <Route path="/erro" element={<ErrorPage />} />
