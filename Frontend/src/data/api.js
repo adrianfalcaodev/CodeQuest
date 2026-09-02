@@ -33,7 +33,8 @@ async function pedido(
   caminho,
   { method = "GET", body, autenticado = true } = {},
 ) {
-  const headers = { "Content-Type": "application/json" };
+  const eFormulario = body instanceof FormData;
+  const headers = eFormulario ? {} : { "Content-Type": "application/json" };
 
   if (autenticado) {
     const token = getToken();
@@ -43,7 +44,7 @@ async function pedido(
   const resposta = await fetch(`${API_URL}${caminho}`, {
     method,
     headers,
-    body: body ? JSON.stringify(body) : undefined,
+    body: body ? (eFormulario ? body : JSON.stringify(body)) : undefined,
   });
 
   const contentType = resposta.headers.get("content-type") || "";
@@ -100,6 +101,13 @@ export const api = {
   login: (dados) =>
     pedido("/auth/login", { method: "POST", body: dados, autenticado: false }),
   perfil: () => pedido("/auth/perfil"),
+  editarPerfil: (dados) =>
+    pedido("/users/perfil", { method: "PATCH", body: dados }),
+  carregarAvatar: (ficheiro) => {
+    const dados = new FormData();
+    dados.append("avatar", ficheiro);
+    return pedido("/users/perfil/avatar", { method: "POST", body: dados });
+  },
   recuperarPassword: (dados) =>
     pedido("/auth/recuperar-password", {
       method: "POST",

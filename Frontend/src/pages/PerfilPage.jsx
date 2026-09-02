@@ -48,6 +48,7 @@ export default function PerfilPage() {
     Promise.all([getProfile(), getUserStats(), getAchievements()])
       .then(([profile, userStats, userAchievements]) => {
         setUser(profile);
+        setNovoUsername(profile.username || "");
         setStats(userStats);
         setAchievements(userAchievements || []);
       })

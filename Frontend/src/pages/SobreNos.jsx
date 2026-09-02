@@ -1,6 +1,7 @@
 import { BookOpen, Users, Sparkles } from "lucide-react";
 import "../style/integration.css";
 import "../style/social.css";
+import Card from "../components/Card.jsx";
 
 export default function SobreNos() {
   return (
@@ -20,6 +21,7 @@ export default function SobreNos() {
 
       <div className="sobre-grid">
         <article className="about-card">
+          <Card>
           <div className="about-icon">
             <BookOpen size={28} />
           </div>
@@ -35,9 +37,11 @@ export default function SobreNos() {
             <li>Sistema de gamificação com XP, níveis, streaks e conquistas</li>
             <li>Ranking para acompanhar o progresso com outros utilizadores</li>
           </ul>
+          </Card>
         </article>
 
         <article className="about-card">
+          <Card>
           <div className="about-icon">
             <Sparkles size={28} />
           </div>
@@ -53,9 +57,11 @@ export default function SobreNos() {
             <li>Recompensar progresso real, não só repetição</li>
             <li>Comunidade envolvida através de ranking e conquistas</li>
           </ul>
+          </Card>
         </article>
 
         <article className="about-card">
+          <Card>
           <div className="about-icon">
             <Users size={28} />
           </div>
@@ -69,6 +75,7 @@ export default function SobreNos() {
             <li>Ana Novo</li>
             <li>Diogo Pinto</li>
           </ul>
+          </Card>
         </article>
       </div>
 
