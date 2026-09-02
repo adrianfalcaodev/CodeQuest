@@ -85,11 +85,13 @@ export async function submeterQuiz(req, res) {
     let xpGanho = 0;
     let subiuNivel = false;
     let nivel = null;
+    let xpTotal = null;
     if (acertosNovos > 0) {
       const xpAcertos = await atribuirXp(utilizadorId, 'ACERTAR_QUESTAO', acertosNovos * 20, conn);
       xpGanho += xpAcertos.xpGanho;
       subiuNivel ||= xpAcertos.subiuNivel;
       nivel = xpAcertos.nivel;
+      xpTotal = xpAcertos.xpTotal;
     }
     if (passou && !progressoAtual?.concluido) {
       await conn.query('UPDATE progresso_modulos SET concluido = TRUE, data_conclusao = NOW() WHERE utilizador_id = ? AND modulo_id = ?', [utilizadorId, quiz.modulo_id]);
@@ -98,10 +100,19 @@ export async function submeterQuiz(req, res) {
       xpGanho += xpQuiz.xpGanho + xpModulo.xpGanho;
       subiuNivel ||= xpQuiz.subiuNivel || xpModulo.subiuNivel;
       nivel = xpModulo.nivel ?? xpQuiz.nivel ?? nivel;
+      xpTotal = xpModulo.xpTotal ?? xpQuiz.xpTotal ?? xpTotal;
+    }
+    if (xpTotal === null) {
+      // nenhuma das ações acima concedeu XP nesta submissão (ex: repetição
+      // de um quiz já concluído sem melhorar o resultado); vai buscar o
+      // total atual para que o frontend não fique com um valor em falta.
+      const [[utilizadorAtual]] = await conn.query('SELECT xp, nivel FROM utilizadores WHERE id = ?', [utilizadorId]);
+      xpTotal = utilizadorAtual.xp;
+      nivel = nivel ?? utilizadorAtual.nivel;
     }
     const novasConquistas = await verificarConquistas(utilizadorId, { moduloId: quiz.modulo_id, quizId, nota }, conn);
     await conn.commit();
-    res.json({ tentativaId: resultadoTentativa.insertId, nota, acertos, erros, totalPerguntas: perguntas.length, correcao: detalhesCorrecao, xpGanho, subiuNivel, nivel, novasConquistas, passou, notaMinimaConclusao: NOTA_MINIMA_CONCLUSAO });
+    res.json({ tentativaId: resultadoTentativa.insertId, nota, acertos, erros, totalPerguntas: perguntas.length, correcao: detalhesCorrecao, xpGanho, subiuNivel, nivel, xpTotal, novasConquistas, passou, notaMinimaConclusao: NOTA_MINIMA_CONCLUSAO });
   } catch (erro) {
     await conn.rollback();
     throw erro;

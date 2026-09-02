@@ -78,7 +78,7 @@ export default function QuizPage() {
       const response = await submitQuiz(quizId, respostas, tempoGastoSegundos);
       setResult(response);
       notificarGamificacao(response);
-      atualizarUtilizador({ nivel: response.nivel, xp: response.xp });
+      atualizarUtilizador({ nivel: response.nivel, xp: response.xpTotal });
     } catch (err) {
       setError(err?.message || "Não foi possível submeter o quiz.");
     } finally {

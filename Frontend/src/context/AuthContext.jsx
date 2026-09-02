@@ -49,6 +49,7 @@ export function AuthProvider({ children }) {
     const resposta = await api.registar({ username, email, password });
     setToken(resposta.token);
     setUtilizador(resposta.utilizador);
+    setUltimaGamificacao(resposta.gamificacao);
     return resposta;
   }, []);
 

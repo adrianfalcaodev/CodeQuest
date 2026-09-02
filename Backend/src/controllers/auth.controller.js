@@ -41,8 +41,11 @@ export async function registar(req, res) {
     email,
   };
 
+  // Gamificação: conquista "Bem-vindo ao CodeQuest" (CRIAR_CONTA)
+  const novasConquistas = await verificarConquistas(utilizador.id);
+
   const token = assinarToken(utilizador);
-  res.status(201).json({ token, utilizador });
+  res.status(201).json({ token, utilizador, gamificacao: { novasConquistas } });
 }
 
 export async function login(req, res) {
