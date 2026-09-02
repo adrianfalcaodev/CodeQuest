@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/button";
 import Card from "../components/card";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useNotificacao } from "../context/NotificationContext.jsx";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { entrar } = useAuth();
+  const { notificarGamificacao } = useNotificacao();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -18,7 +20,8 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await entrar(email, password);
+      const resposta = await entrar(email, password);
+      notificarGamificacao(resposta.gamificacao);
       navigate("/homepage");
     } catch (err) {
       setError(

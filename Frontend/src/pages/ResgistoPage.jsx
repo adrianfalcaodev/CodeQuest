@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/button";
 import Card from "../components/card";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useNotificacao } from "../context/NotificationContext.jsx";
 
 export default function RegistoPage() {
   const [name, setName] = useState("");
@@ -14,6 +15,7 @@ export default function RegistoPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { registar } = useAuth();
+  const { notificarGamificacao } = useNotificacao();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -28,7 +30,8 @@ export default function RegistoPage() {
     setLoading(true);
 
     try {
-      await registar(name, email, password);
+      const resposta = await registar(name, email, password);
+      notificarGamificacao(resposta.gamificacao);
       setSuccess("Conta criada com sucesso. Redirecionando para o painel...");
       setTimeout(() => navigate("/homepage"), 1200);
     } catch (err) {
