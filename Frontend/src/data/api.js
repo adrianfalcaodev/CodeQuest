@@ -58,6 +58,37 @@ async function pedido(
   return dados;
 }
 
+/**
+ * Envia um ficheiro (multipart/form-data) para o endpoint de avatar.
+ * Não pode reutilizar pedido(): esse helper força sempre
+ * Content-Type: application/json, o que quebra o upload de ficheiros.
+ */
+async function uploadFicheiro(ficheiro) {
+  const headers = {};
+  const token = getToken();
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const formData = new FormData();
+  formData.append("avatar", ficheiro);
+
+  const resposta = await fetch(`${API_URL}/users/perfil/avatar`, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
+
+  const contentType = resposta.headers.get("content-type") || "";
+  const dados = contentType.includes("application/json")
+    ? await resposta.json()
+    : null;
+
+  if (!resposta.ok) {
+    throw new Error(dados?.erro || `Erro ${resposta.status}`);
+  }
+
+  return dados;
+}
+
 export const api = {
   // Auth
   registar: (dados) =>
@@ -87,6 +118,11 @@ export const api = {
   obterModulo: (id) => pedido(`/modulos/${id}`),
   marcarModuloEstudado: (id) =>
     pedido(`/modulos/${id}/estudado`, { method: "POST" }),
+
+  // Perfil (editar username / avatar)
+  atualizarPerfil: (dados) =>
+    pedido("/users/perfil", { method: "PATCH", body: dados }),
+  uploadAvatarPerfil: (ficheiro) => uploadFicheiro(ficheiro),
 
   // Quizzes
   obterQuiz: (moduloId) => pedido(`/quizzes/modulo/${moduloId}`),
@@ -158,4 +194,12 @@ export function getAchievements() {
 
 export function markModuleAsStudied(moduleId) {
   return api.marcarModuloEstudado(moduleId);
+}
+
+export function updateProfile(dados) {
+  return api.atualizarPerfil(dados);
+}
+
+export function uploadAvatar(ficheiro) {
+  return api.uploadAvatarPerfil(ficheiro);
 }
