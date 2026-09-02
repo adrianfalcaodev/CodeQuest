@@ -67,8 +67,8 @@ export default function SobreNos() {
           </div>
           <h2>Quem fez isto</h2>
           <p>
-            Projeto desenvolvido no âmbito do curso Técnico Superior em
-            Programação e Sistemas de Informação (TI-PSI).
+            Projeto desenvolvido no âmbito do curso Técnico Especialista em
+            Tecnologias e Programação de Sistemas de Informação (TE-TPSI).
           </p>
           <ul className="about-list about-team">
             <li>Ádrian Falcão</li>
