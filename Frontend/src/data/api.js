@@ -103,11 +103,6 @@ export const api = {
   perfil: () => pedido("/auth/perfil"),
   editarPerfil: (dados) =>
     pedido("/users/perfil", { method: "PATCH", body: dados }),
-  carregarAvatar: (ficheiro) => {
-    const dados = new FormData();
-    dados.append("avatar", ficheiro);
-    return pedido("/users/perfil/avatar", { method: "POST", body: dados });
-  },
   recuperarPassword: (dados) =>
     pedido("/auth/recuperar-password", {
       method: "POST",
@@ -142,8 +137,9 @@ export const api = {
   obterTentativasQuiz: (quizId) => pedido(`/quizzes/${quizId}/tentativas`),
 
   // Ranking
-  minhaPosicao: () => pedido("/ranking/posicao"),
-  listarRanking: (pagina = 1) => pedido(`/ranking?pagina=${pagina}`),
+  minhaPosicao: () => pedido("/ranking/minha-posicao"),
+  listarRanking: (pagina = 1, limite = 10) =>
+    pedido(`/ranking?pagina=${pagina}&limite=${limite}`),
 
   // Estatísticas e Conquistas
   estatisticas: () => pedido("/users/estatisticas"),
@@ -168,8 +164,12 @@ export function getProfile() {
   return api.perfil();
 }
 
-export function getRanking() {
-  return api.listarRanking();
+export function getRanking(pagina = 1) {
+  return api.listarRanking(pagina);
+}
+
+export function minhaPosicao() {
+  return api.minhaPosicao();
 }
 
 export function getModules() {

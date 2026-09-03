@@ -353,22 +353,28 @@ button.btn-lg {
 }
 
 .grid-2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
 }
 
+.grid-2 > * { flex: 1 1 300px; min-width: 0; }
+
 .grid-3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 
+.grid-3 > * { flex: 1 1 250px; min-width: 0; }
+
 .grid-4 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
+
+.grid-4 > * { flex: 1 1 200px; min-width: 0; }
 
 /* ========== ESTADOS DE MENSAGENS ========== */
 
@@ -789,7 +795,7 @@ tbody tr:hover {
   .navbar-links a::after { display: none; }
 
   .grid-2, .grid-3, .grid-4 {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .navbar-inner {

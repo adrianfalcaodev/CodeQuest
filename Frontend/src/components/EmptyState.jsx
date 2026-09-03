@@ -17,9 +17,7 @@ export default function EmptyState({
       </div>
       {actionText && actionLink && (
         <div className="empty-state-action">
-          <Link to={actionLink}>
-            <button>{actionText}</button>
-          </Link>
+          <Link className="btn" to={actionLink}>{actionText}</Link>
         </div>
       )}
     </div>

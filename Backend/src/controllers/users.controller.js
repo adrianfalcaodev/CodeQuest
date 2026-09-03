@@ -57,22 +57,27 @@ export async function uploadAvatarPerfil(req, res) {
   const utilizadorId = req.utilizador.id;
   const novoCaminho = `/uploads/avatars/${req.file.filename}`;
 
-  const [[atual]] = await pool.query('SELECT avatar_url FROM utilizadores WHERE id = ?', [
-    utilizadorId,
-  ]);
+  try {
+    const [[atual]] = await pool.query('SELECT avatar_url FROM utilizadores WHERE id = ?', [
+      utilizadorId,
+    ]);
 
-  await pool.query('UPDATE utilizadores SET avatar_url = ? WHERE id = ?', [
-    novoCaminho,
-    utilizadorId,
-  ]);
+    await pool.query('UPDATE utilizadores SET avatar_url = ? WHERE id = ?', [
+      novoCaminho,
+      utilizadorId,
+    ]);
 
-  // Apaga o avatar anterior do disco, se existir e for um upload nosso
-  if (atual?.avatar_url && atual.avatar_url.startsWith('/uploads/avatars/')) {
-    const caminhoAntigo = path.join(process.cwd(), atual.avatar_url);
-    fs.unlink(caminhoAntigo, () => {}); // falha silenciosa: não é crítico
+    // Apaga o avatar anterior do disco, se existir e for um upload nosso
+    if (atual?.avatar_url && atual.avatar_url.startsWith('/uploads/avatars/')) {
+      const caminhoAntigo = path.join(process.cwd(), atual.avatar_url);
+      fs.unlink(caminhoAntigo, () => {});
+    }
+
+    res.json({ avatarUrl: novoCaminho });
+  } catch (erro) {
+    fs.unlink(req.file.path, () => {});
+    throw erro;
   }
-
-  res.json({ avatarUrl: novoCaminho });
 }
 
 export async function estatisticas(req, res) {

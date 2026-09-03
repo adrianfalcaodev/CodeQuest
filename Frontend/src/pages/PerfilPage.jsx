@@ -22,13 +22,12 @@ import {
   uploadAvatar,
   urlAvatar,
 } from "../data/api.js";
-import { getStoredUser } from "../data/auth.js";
 import { useAuth } from "../context/AuthContext.jsx";
 import "../style/social.css";
 
 export default function PerfilPage() {
-  const { atualizarUtilizador } = useAuth();
-  const [user, setUser] = useState(getStoredUser());
+  const { utilizador, atualizarUtilizador } = useAuth();
+  const [user, setUser] = useState(utilizador);
   const [stats, setStats] = useState(null);
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,12 +52,12 @@ export default function PerfilPage() {
         setAchievements(userAchievements || []);
       })
       .catch(() => {
-        setUser(getStoredUser());
+        setUser(utilizador);
         setStats(null);
         setAchievements([]);
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [utilizador]);
 
   function iniciarEdicaoNome() {
     setNovoUsername(user.username || "");

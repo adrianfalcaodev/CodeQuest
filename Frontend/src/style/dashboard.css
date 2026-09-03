@@ -30,8 +30,8 @@
 }
 
 .streak-box {
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    flex-wrap: wrap;
     column-gap: .45rem;
     align-items: center;
     min-width: 124px;
@@ -49,7 +49,7 @@
 }
 
 .streak-box span {
-    grid-column: 2;
+    flex-basis: calc(100% - 1.5rem);
     color: var(--text-muted);
     font-size: .72rem;
 }
@@ -67,8 +67,9 @@
 }
 
 .level-mark {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 0 0 auto;
     width: 58px;
     height: 58px;
@@ -81,7 +82,8 @@
 }
 
 .level-copy {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     gap: .3rem;
 }
@@ -123,10 +125,20 @@
 }
 
 .dashboard-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr);
+    display: flex;
+    align-items: flex-start;
     gap: clamp(2rem, 6vw, 4rem);
     padding-top: 3rem;
+}
+
+.dashboard-grid > *:first-child {
+    flex: 1.5 1 0;
+    min-width: 0;
+}
+
+.dashboard-grid > *:last-child {
+    flex: .8 1 260px;
+    min-width: 0;
 }
 
 .section-heading {
@@ -155,7 +167,8 @@
 }
 
 .mission-list {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: .75rem;
 }
 
@@ -179,8 +192,9 @@
 }
 
 .mission-icon {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 0 0 auto;
     width: 42px;
     height: 42px;
@@ -199,7 +213,8 @@
 }
 
 .mission-copy {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     gap: .35rem;
     min-width: 0;
@@ -231,8 +246,9 @@
 }
 
 .mission-action {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -303,7 +319,7 @@
     }
 
     .dashboard-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 2.5rem;
         padding-top: 2rem;
     }

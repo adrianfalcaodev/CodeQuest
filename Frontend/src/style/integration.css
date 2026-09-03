@@ -30,10 +30,12 @@
 }
 
 .achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 }
+
+.achievements-grid > * { flex: 1 1 255px; min-width: 0; }
 
 .achievement-card {
     display: flex;

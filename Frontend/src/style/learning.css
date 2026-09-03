@@ -35,10 +35,12 @@
 }
 
 .module-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 }
+
+.module-grid > * { flex: 1 1 245px; min-width: 0; }
 
 .module-tile {
     display: flex;
@@ -64,8 +66,9 @@
 }
 
 .module-order {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 38px;
     height: 38px;
     border-radius: 11px;
