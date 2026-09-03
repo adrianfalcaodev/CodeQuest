@@ -65,7 +65,7 @@ export default function SobreNos() {
           <div className="about-icon">
             <Users size={28} />
           </div>
-          <h2>Quem fez isto</h2>
+          <h2>Autores</h2>
           <p>
             Projeto desenvolvido no âmbito do curso Técnico Especialista em
             Tecnologias e Programação de Sistemas de Informação (TE-TPSI).
