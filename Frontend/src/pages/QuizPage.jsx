@@ -219,6 +219,7 @@ export default function QuizPage() {
             {proximoModulo ? (
               <div className="quest-next-module">
                 <Trophy size={18} />
+                
                 <span>
                   Pronto para continuar? O próximo módulo é{" "}
                   <strong>{proximoModulo.titulo}</strong>.
@@ -269,7 +270,7 @@ export default function QuizPage() {
           Voltar ao módulo
         </Link>
         <span>
-          <Flame size={17} /> {utilizador?.streakAtual ?? 0} dias de streak
+          <Flame size={17} /> {utilizador?.streakAtual ?? 0} dias de sequência
         </span>
       </div>
       <div className="quest-heading">
@@ -312,6 +313,7 @@ export default function QuizPage() {
                   onClick={() => chooseOption(option.id)}
                   aria-pressed={isSelected}
                 >
+                  
                   <span className="answer-icon">
                     {isSelected ? <Check size={17} /> : ""}
                   </span>

@@ -27,7 +27,7 @@ export default function LoginPage() {
       setError(
         err?.message ||
           err?.erro ||
-          "Erro ao tentar entrar. Verifique suas credenciais.",
+          "Erro ao tentar entrar. Verifica as tuas credenciais.",
       );
     } finally {
       setLoading(false);
@@ -38,8 +38,8 @@ export default function LoginPage() {
     <div className="login">
       <form onSubmit={handleSubmit}>
         <Card
-          title="Entrar na sua conta"
-          subtitle="Acesse o CodeQuest para continuar a sua jornada."
+          title="Entrar na tua conta"
+          subtitle="Acede ao CodeQuest para continuares a tua jornada."
         >
           <div className="item">
             <label htmlFor="email">Email</label>
@@ -49,7 +49,7 @@ export default function LoginPage() {
               name="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="seu@email.com"
+              placeholder="teu@email.com"
               required
             />
           </div>
@@ -70,21 +70,21 @@ export default function LoginPage() {
           {error && <p className="form-error">{error}</p>}
 
           <p>
-            Esqueceu a palavra-passe?{" "}
+            Esqueceste-te da palavra-passe?{" "}
             <Link className="card-link" to="/esqueceusenha">
-              Recuperar senha
+              Recuperar palavra-passe
             </Link>
           </p>
 
           <p>
-            Ainda não tem conta?{" "}
+            Ainda não tens conta?{" "}
             <Link className="card-link" to="/registo">
               Registar
             </Link>
           </p>
 
           <Button type="submit" disabled={loading}>
-            {loading ? "Entrando..." : "Entrar"}
+            {loading ? "A entrar..." : "Entrar"}
           </Button>
         </Card>
       </form>

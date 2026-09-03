@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  ArrowRight,
   BookOpen,
   CheckCircle2,
   Clock,
@@ -103,7 +102,12 @@ export default function LinguagensPage() {
               const pontuacaoPerfeita =
                 temQuiz && module.maxAcertos === module.totalPerguntas;
               return (
-              <article className="module-tile" key={module.id}>
+              <Link
+                className="module-tile"
+                key={module.id}
+                to={`/modulo/${module.id}`}
+                aria-label={`Abrir ${module.titulo}`}
+              >
                 <div className="module-tile-top">
                   <span className="module-order">
                     {String(module.ordem ?? index + 1).padStart(2, "0")}
@@ -141,14 +145,8 @@ export default function LinguagensPage() {
                       </span>
                     )}
                   </div>
-                  <Link
-                    to={`/modulo/${module.id}`}
-                    aria-label={`Abrir ${module.titulo}`}
-                  >
-                    <ArrowRight size={19} />
-                  </Link>
                 </div>
-              </article>
+              </Link>
               );
             })}
           </div>

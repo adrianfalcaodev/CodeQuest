@@ -13,7 +13,7 @@ export default function LandingPage() {
         <h1>Transforme curiosidade em código.</h1>
         <p className="landing-lead">
           Domine tecnologia com desafios curtos, progresso visível e uma jornada
-          feita para manter você motivado.
+          feita para te manter motivado.
         </p>
         <div className="landing-actions">
           <Link className="landing-primary-action" to="/registo">

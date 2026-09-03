@@ -344,7 +344,7 @@
     justify-content: center;
     gap: .6rem;
     max-width: 520px;
-    margin: 0 auto 1.5rem;
+    margin: 10px auto 1.5rem;
     padding: .9rem 1.25rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);

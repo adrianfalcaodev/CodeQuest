@@ -27,15 +27,14 @@ export default function SobreNos() {
           </div>
           <h2>O que é CodeQuest?</h2>
           <p>
-            CodeQuest é uma plataforma de aprendizagem de programação que torna o
-            estudo mais envolvente através de XP, níveis, streaks, conquistas e um
-            ranking entre colegas.
+            O CodeQuest é uma plataforma de aprendizagem de programação que torna o
+            estudo mais envolvente através de XP, níveis, sequências, conquistas e uma
+            classificação entre colegas.
           </p>
           <ul className="about-list">
-            <li>10 módulos de JavaScript, do zero até à manipulação do DOM</li>
-            <li>Quizzes com correção automática e explicação de respostas</li>
-            <li>Sistema de gamificação com XP, níveis, streaks e conquistas</li>
-            <li>Ranking para acompanhar o progresso com outros utilizadores</li>
+            <li>Quizzes com correção automática e explicação das respostas</li>
+            <li>Sistema de gamificação com XP, níveis, sequências e conquistas</li>
+            <li>Classificação para acompanhar o progresso com outros utilizadores</li>
           </ul>
           </Card>
         </article>

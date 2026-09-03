@@ -202,7 +202,7 @@ export default function HomePage() {
             <div className="stats-container">
               <div className="stat-row">
                 <span>
-                  <Flame size={18} /> Streak atual
+                  <Flame size={18} /> Sequência atual
                 </span>
                 <strong>{streak} dias</strong>
               </div>
@@ -220,12 +220,12 @@ export default function HomePage() {
               </div>
             </div>
             <Link className="rank-link" to="/ranking">
-              Ver leaderboard <ArrowRight size={16} />
+              Ver classificação <ArrowRight size={16} />
             </Link>
           </aside>
         </div>
 
-        {loading && <p>Carregando dashboard...</p>}
+        {loading && <p>A carregar o painel...</p>}
       </div>
     </div>
   );
