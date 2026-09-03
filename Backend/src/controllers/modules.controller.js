@@ -30,7 +30,13 @@ export async function listarModulos(req, res) {
     [utilizadorId, utilizadorId]
   );
 
-  res.json(modulos);
+  res.json(
+    modulos.map((m) => ({
+      ...m,
+      estudado: Boolean(m.estudado),
+      concluido: Boolean(m.concluido),
+    }))
+  );
 }
 
 // RF07 - Estudar conteúdo (devolve o conteúdo completo de um módulo)
@@ -44,7 +50,11 @@ export async function obterModulo(req, res) {
     [req.utilizador.id, id]
   );
   if (!modulo) return res.status(404).json({ erro: 'Módulo não encontrado.' });
-  res.json(modulo);
+  res.json({
+    ...modulo,
+    estudado: Boolean(modulo.estudado),
+    concluido: Boolean(modulo.concluido),
+  });
 }
 
 // RF08 - Registar progresso: marca o módulo como estudado e dá XP
