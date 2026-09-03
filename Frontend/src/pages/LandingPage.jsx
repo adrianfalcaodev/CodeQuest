@@ -25,8 +25,7 @@ export default function LandingPage() {
         </div>
       </div>
       <div className="imageLumen">
-        
-        <img src={LumenImage} alt="Mascote Lumen" width={230} />
+        <img src={LumenImage} alt="Mascote Lumen" />
       </div>
     </section>
   );
