@@ -18,7 +18,7 @@ export default function EsqueceuPassPage() {
 
         try {
             const response = await forgotPassword({ email });
-            setMessage(response.mensagem || "Pedido enviado. Verifique o seu email.");
+            setMessage(response.mensagem || "Pedido enviado. Verifica o teu e-mail.");
         } catch (err) {
             setError(err?.message || "Erro ao enviar pedido de recuperação.");
         } finally {
@@ -29,7 +29,7 @@ export default function EsqueceuPassPage() {
     return (
         <div className="login">
             <form onSubmit={handleSubmit}>
-                <Card title="Esqueceu a senha?" subtitle="Indique seu email.">
+                <Card title="Esqueceste-te da palavra-passe?" subtitle="Indica o teu e-mail.">
                     <div className="item">
                         <label htmlFor="email">Email</label>
                         <input
@@ -38,7 +38,7 @@ export default function EsqueceuPassPage() {
                             name="email"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
-                            placeholder="seu@email.com"
+                            placeholder="teu@email.com"
                             required
                         />
                     </div>
@@ -47,11 +47,11 @@ export default function EsqueceuPassPage() {
                     {message && <p className="form-success">{message}</p>}
 
                     <p>
-                        Ainda não tem conta? <Link className="card-link" to="/registo">Registe-se</Link>
+                        Ainda não tens conta? <Link className="card-link" to="/registo">Regista-te</Link>
                     </p>
 
                     <Button type="submit" disabled={loading}>
-                        {loading ? "Enviando..." : "Enviar"}
+                        {loading ? "A enviar..." : "Enviar"}
                     </Button>
                 </Card>
             </form>

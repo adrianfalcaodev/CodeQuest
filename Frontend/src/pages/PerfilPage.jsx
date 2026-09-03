@@ -128,7 +128,7 @@ export default function PerfilPage() {
       <EmptyState
         icon={UserRound}
         title="Inicie sessão"
-        subtitle="Entre na sua conta para acompanhar o seu progresso."
+        subtitle="Entra na tua conta para acompanhares o teu progresso."
         actionText="Entrar"
         actionLink="/login"
       />

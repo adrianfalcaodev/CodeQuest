@@ -59,7 +59,7 @@ export default function RankingPage() {
           <span className="social-kicker">
             <Sparkles size={15} /> Comunidade CodeQuest
           </span>
-          <h1>Leaderboard global</h1>
+          <h1>Classificação global</h1>
           <p>Veja quem está a evoluir mais rápido na jornada de programação.</p>
         </div>
         <span className="tag xp">
@@ -111,7 +111,7 @@ export default function RankingPage() {
                     )}
                   </span>
                   <div className="ranking-name">
-                    {user.username}
+                    <span className="ranking-username">{user.username}</span>
                     {souEu && <span className="ranking-me-tag">Tu</span>}
                     <small>Nível {user.nivel ?? user.level ?? 1}</small>
                   </div>

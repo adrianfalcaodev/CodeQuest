@@ -47,7 +47,7 @@ export function NotificationProvider({ children }) {
       }
       if (subiuNivel) {
         adicionar(
-          { tipo: "nivel", texto: `Subiste para o Nível ${nivel ?? ""}! 🎉` },
+          { tipo: "nivel", texto: `Subiste para o nível ${nivel ?? ""}!` },
           4200,
         );
       }

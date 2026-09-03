@@ -19,11 +19,11 @@ export default function ResetPassPage() {
     return (
       <div className="login">
         <Card
-          title="Redefinir Senha"
+          title="Redefinir palavra-passe"
           subtitle="Token inválido ou não fornecido."
         >
           <p>
-            O link para redefinição de senha não é válido. Tente novamente com
+            O link para redefinição da palavra-passe não é válido. Tenta novamente com
             um novo link.
           </p>
           <Button onClick={() => navigate("/esqueceusenha")}>
@@ -40,22 +40,22 @@ export default function ResetPassPage() {
     setMessage("");
 
     if (novaPassword !== confirmarPassword) {
-      setError("As passwords não coincidem.");
+      setError("As palavras-passe não coincidem.");
       return;
     }
 
     if (novaPassword.length < 8) {
-      setError("A password deve ter pelo menos 8 caracteres.");
+      setError("A palavra-passe deve ter pelo menos 8 caracteres.");
       return;
     }
 
     setLoading(true);
     try {
       const response = await api.redefinirPassword(token, novaPassword);
-      setMessage(response.mensagem || "Password redefinida com sucesso!");
+      setMessage(response.mensagem || "Palavra-passe redefinida com sucesso!");
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      setError(err?.message || "Erro ao redefinir a password.");
+      setError(err?.message || "Erro ao redefinir a palavra-passe.");
     } finally {
       setLoading(false);
     }
@@ -64,9 +64,9 @@ export default function ResetPassPage() {
   return (
     <div className="login">
       <form onSubmit={handleSubmit}>
-        <Card title="Redefinir Senha" subtitle="Escolha uma nova password.">
+        <Card title="Redefinir palavra-passe" subtitle="Escolhe uma nova palavra-passe.">
           <div className="item">
-            <label htmlFor="novaPassword">Nova Password</label>
+            <label htmlFor="novaPassword">Nova palavra-passe</label>
             <input
               type="password"
               id="novaPassword"
@@ -79,14 +79,14 @@ export default function ResetPassPage() {
           </div>
 
           <div className="item">
-            <label htmlFor="confirmarPassword">Confirmar Password</label>
+            <label htmlFor="confirmarPassword">Confirmar palavra-passe</label>
             <input
               type="password"
               id="confirmarPassword"
               name="confirmarPassword"
               value={confirmarPassword}
               onChange={(event) => setConfirmarPassword(event.target.value)}
-              placeholder="Repita a password"
+              placeholder="Repete a palavra-passe"
               required
             />
           </div>
@@ -95,7 +95,7 @@ export default function ResetPassPage() {
           {message && <p className="form-success">{message}</p>}
 
           <Button type="submit" disabled={loading}>
-            {loading ? "Processando..." : "Redefinir Password"}
+            {loading ? "A processar..." : "Redefinir palavra-passe"}
           </Button>
         </Card>
       </form>

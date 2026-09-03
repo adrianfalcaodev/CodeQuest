@@ -163,12 +163,30 @@
 .ranking-name {
     flex: 1;
     min-width: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .4rem .6rem;
     color: var(--text-alt);
     font-weight: 700;
 }
 
+.ranking-me-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: .18rem .5rem;
+    border: 1px solid rgba(245, 158, 11, .7);
+    border-radius: 999px;
+    background: rgba(245, 158, 11, .22);
+    color: var(--secondary-light);
+    font-size: .7rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
 .ranking-name small {
-    display: block;
+    flex-basis: 100%;
     margin-top: .1rem;
     color: var(--text-muted);
     font-weight: 400;
@@ -178,6 +196,15 @@
     color: var(--secondary-light);
     font-weight: 800;
     white-space: nowrap;
+}
+
+.ranking-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    width: 100%;
+    margin-top: 1rem;
 }
 
 .achievement-summary {

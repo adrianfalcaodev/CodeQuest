@@ -12,7 +12,7 @@ export default function ErrorPage() {
       </div>
       <div className="error-content">
         <h1>Página não encontrada</h1>
-        <p>Desculpe! A página que está procurando não existe ou foi removida.</p>
+        <p>Desculpa! A página que estás a procurar não existe ou foi removida.</p>
       </div>
       <div className="error-actions">
         <button
@@ -20,14 +20,14 @@ export default function ErrorPage() {
           onClick={() => navigate("/")}
         >
           <Home size={16} style={{ marginRight: "8px" }} />
-          Voltar ao Início
+          Voltar ao início
         </button>
         <button
           className="error-btn-secondary"
           onClick={() => navigate(-1)}
         >
           <ChevronLeft size={16} style={{ marginRight: "8px" }} />
-          Voltar Atrás
+          Voltar atrás
         </button>
       </div>
     </div>

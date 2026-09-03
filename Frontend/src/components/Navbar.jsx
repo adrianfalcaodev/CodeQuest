@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { urlAvatar } from "../data/api.js";
 
 const links = [
-  ["/homepage", "Dashboard"],
+  ["/homepage", "Painel"],
   ["/linguagem", "Módulos"],
   ["/ranking", "Ranking"],
   ["/conquistas", "Conquistas"],

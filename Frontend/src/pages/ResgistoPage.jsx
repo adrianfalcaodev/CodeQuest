@@ -23,7 +23,7 @@ export default function RegistoPage() {
     setSuccess("");
 
     if (password !== confirmPassword) {
-      setError("A senha e a confirmação não coincidem.");
+      setError("A palavra-passe e a confirmação não coincidem.");
       return;
     }
 
@@ -32,11 +32,11 @@ export default function RegistoPage() {
     try {
       const resposta = await registar(name, email, password);
       notificarGamificacao(resposta.gamificacao);
-      setSuccess("Conta criada com sucesso. Redirecionando para o painel...");
+      setSuccess("Conta criada com sucesso. A redirecionar para o painel...");
       setTimeout(() => navigate("/homepage"), 1200);
     } catch (err) {
       setError(
-        err?.message || err?.erro || "Erro ao criar conta. Tente novamente.",
+        err?.message || err?.erro || "Erro ao criar a conta. Tenta novamente.",
       );
     } finally {
       setLoading(false);
@@ -71,7 +71,7 @@ export default function RegistoPage() {
               name="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="seu@email.com"
+              placeholder="teu@email.com"
               required
             />
           </div>
@@ -90,7 +90,7 @@ export default function RegistoPage() {
           </div>
 
           <div className="item">
-            <label htmlFor="confirmPassword">Confirme a Palavra-passe</label>
+            <label htmlFor="confirmPassword">Confirma a palavra-passe</label>
             <input
               type="password"
               id="confirmPassword"
@@ -106,14 +106,14 @@ export default function RegistoPage() {
           {success && <p className="form-success">{success}</p>}
 
           <p>
-            Já tem conta?{" "}
+            Já tens conta?{" "}
             <Link className="card-link" to="/login">
               Entrar
             </Link>
           </p>
 
           <Button type="submit" disabled={loading}>
-            {loading ? "Registrando..." : "Registar"}
+            {loading ? "A registar..." : "Registar"}
           </Button>
         </Card>
       </form>
