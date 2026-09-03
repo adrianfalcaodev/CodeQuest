@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Award, Crown, Medal, Sparkles, Trophy, Zap } from "lucide-react";
+import { Award, ChevronLeft, ChevronRight, Crown, Medal, Sparkles, Trophy, Zap } from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import EmptyState from "../components/EmptyState";
-import { getAchievements, getRanking } from "../data/api.js";
+import { getAchievements, getRanking, minhaPosicao } from "../data/api.js";
 import { urlAvatar } from "../data/api.js";
 import { useAuth } from "../context/AuthContext.jsx";
 import "../style/social.css";
@@ -22,21 +22,24 @@ export default function RankingPage() {
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [pagina, setPagina] = useState(1);
+  const [posicaoPessoal, setPosicaoPessoal] = useState(null);
   useEffect(() => {
-    Promise.all([getRanking(), getAchievements()])
-      .then(([rankingData, achievementsData]) => {
+    Promise.all([getRanking(pagina), getAchievements(), minhaPosicao()])
+      .then(([rankingData, achievementsData, positionData]) => {
         setRanking(
           Array.isArray(rankingData) ? rankingData : rankingData.ranking || [],
         );
         setAchievements(
           Array.isArray(achievementsData) ? achievementsData : [],
         );
+        setPosicaoPessoal(positionData?.posicao ?? null);
       })
       .catch((err) =>
         setError(err?.message || "Não foi possível carregar os dados."),
       )
       .finally(() => setLoading(false));
-  }, []);
+  }, [pagina]);
   if (loading) return <LoadingSpinner />;
   if (error)
     return (
@@ -117,6 +120,27 @@ export default function RankingPage() {
                 );
               })}
             </div>
+            <nav className="ranking-pagination" aria-label="Paginação do ranking">
+              <button
+                type="button"
+                className="ranking-page-button"
+                onClick={() => setPagina((atual) => Math.max(1, atual - 1))}
+                disabled={pagina === 1}
+                title="Página anterior"
+              >
+                <ChevronLeft size={17} />
+              </button>
+              <span>Página {pagina}</span>
+              <button
+                type="button"
+                className="ranking-page-button"
+                onClick={() => setPagina((atual) => atual + 1)}
+                disabled={ranking.length < 10}
+                title="Próxima página"
+              >
+                <ChevronRight size={17} />
+              </button>
+            </nav>
           </section>
         </>
       )}
@@ -130,6 +154,11 @@ export default function RankingPage() {
           </p>
         </div>
       </aside>
+      {posicaoPessoal && (
+        <p className="ranking-personal-position">
+          A tua posição atual: <strong>#{posicaoPessoal}</strong>
+        </p>
+      )}
     </section>
   );
 }

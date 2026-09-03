@@ -34,15 +34,22 @@
 }
 
 .ranking-podium {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
 
+.ranking-podium > * {
+    flex: 1 1 220px;
+    min-width: 0;
+}
+
 .podium-card {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: .35rem;
     min-height: 150px;
     padding: 1rem;
@@ -94,7 +101,8 @@
 }
 
 .ranking-list {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: .45rem;
 }
 
@@ -142,8 +150,9 @@
 }
 
 .ranking-position {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 0 0 34px;
     color: var(--text-muted);
     font-family: var(--font-mono);
@@ -152,8 +161,9 @@
 
 .ranking-avatar,
 .profile-avatar {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     border-radius: 50%;
     color: var(--primary-lighter);
@@ -235,8 +245,9 @@
     position: absolute;
     right: -4px;
     bottom: -4px;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 30px;
     height: 30px;
     padding: 0;
@@ -270,8 +281,9 @@
 }
 
 .profile-name-edit-trigger {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: .25rem;
     border: none;
     border-radius: var(--radius);
@@ -304,8 +316,9 @@
 }
 
 .profile-name-action {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 32px;
     height: 32px;
     padding: 0;
@@ -348,10 +361,15 @@
 }
 
 .profile-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: .8rem;
     margin: 1.25rem 0;
+}
+
+.profile-stats > * {
+    flex: 1 1 calc(25% - .8rem);
+    min-width: 150px;
 }
 
 .profile-stat {
@@ -378,9 +396,18 @@
 }
 
 .profile-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
+    display: flex;
     gap: 1.25rem;
+}
+
+.profile-layout > *:first-child {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.profile-layout > *:last-child {
+    flex: 0 1 300px;
+    min-width: 0;
 }
 
 .profile-panel {
@@ -396,7 +423,8 @@
 }
 
 .achievement-list {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: .55rem;
 }
 
@@ -448,7 +476,8 @@
 }
 
 .progress-overview {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: .65rem;
 }
 
@@ -484,7 +513,7 @@
     }
 
     .ranking-podium {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
     .podium-card {
@@ -492,11 +521,11 @@
     }
 
     .profile-stats {
-        grid-template-columns: repeat(2, 1fr);
+        flex-direction: row;
     }
 
     .profile-layout {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
     .profile-header {
@@ -527,4 +556,44 @@
     .profile-stats {
         gap: .55rem;
     }
+}
+
+.ranking-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+    margin-top: 1rem;
+    color: var(--text-muted);
+    font-size: .82rem;
+}
+
+.ranking-page-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--primary-light);
+    background: var(--surface);
+    cursor: pointer;
+}
+
+.ranking-page-button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.ranking-personal-position {
+    margin: 1rem 0 0;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: .88rem;
+}
+
+.ranking-personal-position strong {
+    color: var(--secondary-light);
 }

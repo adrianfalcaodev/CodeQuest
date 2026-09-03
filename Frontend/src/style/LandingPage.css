@@ -1,6 +1,6 @@
 .landing {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(300px, .8fr);
+    display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     gap: clamp(2rem, 7vw, 7rem);
     min-height: calc(100vh - 162px);
@@ -11,6 +11,7 @@
 }
 
 .landing-text {
+    flex: 1.1 1 0;
     max-width: 650px;
 }
 
@@ -101,9 +102,11 @@
 
 .imageLumen {
     position: relative;
-    display: grid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: .8 1 300px;
     height: clamp(300px, 42vw, 450px);
-    place-items: center;
 }
 
 .imageLumen::before,
@@ -161,7 +164,7 @@
 
 @media (max-width:768px) {
     .landing {
-        grid-template-columns: 1fr;
+        flex-wrap: wrap;
         gap: 1.25rem;
         min-height: calc(100vh - 150px);
         padding: 2rem 1.25rem;

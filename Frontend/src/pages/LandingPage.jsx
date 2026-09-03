@@ -1,7 +1,7 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import "../style/LandingPage.css";
-import LumenImage from "../images/Pic_10_Lumen.png";
+import LumenImage from "../images/Pic_3_Lumen.png";
 
 export default function LandingPage() {
   return (

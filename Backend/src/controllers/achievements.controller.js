@@ -22,3 +22,31 @@ export async function listarConquistas(req, res) {
     }))
   );
 }
+
+export async function obterConquista(req, res) {
+  const utilizadorId = req.utilizador.id;
+  const conquistaId = Number(req.params.id);
+
+  if (!Number.isInteger(conquistaId) || conquistaId < 1) {
+    return res.status(400).json({ erro: 'Identificador de conquista inválido.' });
+  }
+
+  const [[conquista]] = await pool.query(
+    `SELECT c.id, c.nome, c.descricao, c.icone,
+            uc.desbloqueada_em
+     FROM conquistas c
+     LEFT JOIN utilizador_conquistas uc
+       ON uc.conquista_id = c.id AND uc.utilizador_id = ?
+     WHERE c.id = ?`,
+    [utilizadorId, conquistaId]
+  );
+
+  if (!conquista) {
+    return res.status(404).json({ erro: 'Conquista não encontrada.' });
+  }
+
+  res.json({
+    ...conquista,
+    desbloqueada: conquista.desbloqueada_em !== null,
+  });
+}
