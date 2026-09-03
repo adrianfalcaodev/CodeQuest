@@ -70,12 +70,12 @@ export default function ModuloPage() {
         <p>{module.descricao}</p>
         <div className="module-meta">
           <span>{module.linguagem || "Programação"}</span>
-          {module.concluido && (
+          {Boolean(module.concluido) && (
             <span>
               <CheckCircle2 size={14} /> Concluído
             </span>
           )}
-          {module.estudado && !module.concluido && (
+          {Boolean(module.estudado) && !module.concluido && (
             <span>Pronto para o quiz</span>
           )}
         </div>
@@ -97,7 +97,7 @@ export default function ModuloPage() {
             {marking ? "A guardar progresso..." : "Marcar como estudado"}
           </Button>
         )}
-        {module.estudado && (
+        {Boolean(module.estudado) && (
           <Link to={`/quiz?moduleId=${module.id}`}>
             <Button>
               <CirclePlay size={18} /> Fazer quiz do módulo

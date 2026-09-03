@@ -334,7 +334,62 @@
 
 .quest-actions {
     justify-content: center;
+    flex-wrap: wrap;
     gap: .8rem;
+}
+
+.quest-next-module {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+    padding: .9rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--text-muted);
+    background: var(--surface-alt);
+    font-size: .95rem;
+}
+
+.quest-next-module svg {
+    flex: 0 0 auto;
+    color: var(--secondary);
+}
+
+.quest-next-module strong {
+    color: var(--text-alt);
+}
+
+.quest-congrats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .9rem;
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+    padding: 1.1rem 1.4rem;
+    border: 1px solid rgba(245, 158, 11, .35);
+    border-radius: var(--radius-lg);
+    background: rgba(245, 158, 11, .1);
+    text-align: left;
+}
+
+.quest-congrats svg {
+    flex: 0 0 auto;
+    color: var(--secondary-light);
+}
+
+.quest-congrats strong {
+    display: block;
+    color: var(--secondary-light);
+    font-size: 1.1rem;
+}
+
+.quest-congrats p {
+    margin: .15rem 0 0;
+    color: var(--text-muted);
 }
 
 .correction-list {
