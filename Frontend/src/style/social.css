@@ -125,30 +125,6 @@
     background: rgba(124, 58, 237, .09);
 }
 
-.ranking-entry.is-me {
-    border-color: var(--primary-light);
-    background: rgba(124, 58, 237, .18);
-    box-shadow: inset 0 0 0 1px rgba(124, 58, 237, .4);
-}
-
-.ranking-entry.is-me:hover {
-    background: rgba(124, 58, 237, .22);
-}
-
-.ranking-me-tag {
-    display: inline-block;
-    margin-left: .5rem;
-    padding: .1rem .5rem;
-    border-radius: 999px;
-    background: var(--gradient-primary);
-    color: #fff;
-    font-size: .68rem;
-    font-weight: 800;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    vertical-align: middle;
-}
-
 .ranking-position {
     display: flex;
     align-items: center;
@@ -350,6 +326,83 @@
     margin: 0;
 }
 
+.profile-edit-button {
+    margin-left: .5rem;
+    white-space: nowrap;
+}
+
+.profile-feedback {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    margin: .8rem 0 0;
+    padding: .7rem .9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-alt);
+    font-size: .9rem;
+}
+
+.profile-feedback.is-success {
+    color: var(--tertiary-light);
+}
+
+.profile-feedback.is-error {
+    color: var(--danger-light);
+}
+
+.profile-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.profile-editor-heading,
+.profile-editor-fields {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.profile-editor-heading h2 {
+    margin: 0;
+}
+
+.profile-editor-fields > label,
+.avatar-upload {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: .45rem;
+    color: var(--text-alt);
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.avatar-upload {
+    align-content: start;
+}
+
+.avatar-upload small {
+    overflow: hidden;
+    color: var(--text-muted);
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
 .profile-level {
     margin-left: auto;
     padding: .55rem .8rem;
@@ -415,6 +468,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background: var(--surface-alt);
+    max-height: min-content;
 }
 
 .profile-panel h2 {
@@ -429,7 +483,7 @@
 }
 
 .achievement-list-scroll {
-    max-height: 400px;
+    max-height: 150px;
     overflow-y: auto;
     padding-right: 8px;
     margin-right: -8px;
@@ -506,6 +560,36 @@
     background: var(--gradient-primary);
 }
 
+.sobre-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+}
+
+.sobre-grid > * {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+.about-card {
+    display: flex;
+    min-width: 0;
+}
+
+.about-card .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+}
+
+.about-card .card-content {
+    flex: 1;
+}
+
 @media (max-width:760px) {
     .social-hero {
         align-items: flex-start;
@@ -529,11 +613,38 @@
     }
 
     .profile-header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .profile-edit-button {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .profile-editor-fields {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .profile-editor-heading {
+        align-items: flex-start;
+    }
+
+    .profile-editor-heading .btn {
+        flex: 0 0 auto;
+    }
+
+    .profile-header {
         flex-wrap: wrap;
     }
 
     .profile-level {
         margin-left: 0;
+    }
+
+    .sobre-grid {
+        flex-direction: column;
     }
 }
 
@@ -556,44 +667,4 @@
     .profile-stats {
         gap: .55rem;
     }
-}
-
-.ranking-pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .8rem;
-    margin-top: 1rem;
-    color: var(--text-muted);
-    font-size: .82rem;
-}
-
-.ranking-page-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--primary-light);
-    background: var(--surface);
-    cursor: pointer;
-}
-
-.ranking-page-button:disabled {
-    opacity: .4;
-    cursor: not-allowed;
-}
-
-.ranking-personal-position {
-    margin: 1rem 0 0;
-    color: var(--text-muted);
-    text-align: center;
-    font-size: .88rem;
-}
-
-.ranking-personal-position strong {
-    color: var(--secondary-light);
 }
