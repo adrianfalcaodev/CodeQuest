@@ -4,6 +4,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import EmptyState from "../components/EmptyState";
 import { getAchievements, getRanking } from "../data/api.js";
 import { urlAvatar } from "../data/api.js";
+import { useAuth } from "../context/AuthContext.jsx";
 import "../style/social.css";
 
 const medal = (index) =>
@@ -16,6 +17,7 @@ const medal = (index) =>
   ) : null;
 
 export default function RankingPage() {
+  const { utilizador } = useAuth();
   const [ranking, setRanking] = useState([]);
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -88,9 +90,11 @@ export default function RankingPage() {
               <span className="tag primary">por XP</span>
             </header>
             <div className="ranking-list">
-              {ranking.slice(0, 10).map((user, index) => (
+              {ranking.slice(0, 10).map((user, index) => {
+                const souEu = utilizador && user.id === utilizador.id;
+                return (
                 <article
-                  className={`ranking-entry ${index < 3 ? "is-top" : ""}`}
+                  className={`ranking-entry ${index < 3 ? "is-top" : ""} ${souEu ? "is-me" : ""}`}
                   key={user.id}
                 >
                   <span className="ranking-position">
@@ -105,11 +109,13 @@ export default function RankingPage() {
                   </span>
                   <div className="ranking-name">
                     {user.username}
+                    {souEu && <span className="ranking-me-tag">Tu</span>}
                     <small>Nível {user.nivel ?? user.level ?? 1}</small>
                   </div>
                   <strong className="ranking-xp">{user.xp} XP</strong>
                 </article>
-              ))}
+                );
+              })}
             </div>
           </section>
         </>

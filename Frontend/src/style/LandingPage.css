@@ -137,6 +137,8 @@
 .imageLumen img {
     position: relative;
     z-index: 1;
+    max-height: 100%;
+    width: auto;
     filter: drop-shadow(0 24px 35px rgba(0, 0, 0, .5));
     transition: transform .3s ease;
 }
@@ -188,8 +190,8 @@
     }
 
     .imageLumen img {
-        max-width: 70%;
-        height: auto;
+        max-height: 100%;
+        width: auto;
     }
 }
 
