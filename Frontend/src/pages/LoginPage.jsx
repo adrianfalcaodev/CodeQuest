@@ -70,8 +70,9 @@ export default function LoginPage() {
           {error && <p className="form-error">{error}</p>}
 
           <p>
+            Esqueceu a palavra-passe?{" "}
             <Link className="card-link" to="/esqueceusenha">
-              Esqueceu a palavra-passe?
+              Recuperar senha
             </Link>
           </p>
 
