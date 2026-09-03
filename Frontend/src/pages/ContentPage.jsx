@@ -48,7 +48,7 @@ export default function ContentPage() {
         <Link to={`/modulo/${module.id}`}>
           <ArrowLeft size={17} /> Visão geral
         </Link>
-        {module.estudado && (
+        {Boolean(module.estudado) && (
           <Link to={`/quiz?moduleId=${module.id}`}>
             Testar conhecimentos <CirclePlay size={17} />
           </Link>

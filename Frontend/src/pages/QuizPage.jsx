@@ -6,12 +6,13 @@ import {
   Flame,
   Heart,
   Lightbulb,
+  PartyPopper,
   RotateCcw,
   Trophy,
   XCircle,
 } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
-import { getQuiz, submitQuiz } from "../data/api.js";
+import { getModules, getQuiz, submitQuiz } from "../data/api.js";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useNotificacao } from "../context/NotificationContext.jsx";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
@@ -32,6 +33,7 @@ export default function QuizPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [quizId, setQuizId] = useState(null);
+  const [modules, setModules] = useState([]);
 
   useEffect(() => {
     async function loadQuiz() {
@@ -41,9 +43,13 @@ export default function QuizPage() {
         return;
       }
       try {
-        const data = await getQuiz(moduleId);
+        const [data, listaModulos] = await Promise.all([
+          getQuiz(moduleId),
+          getModules().catch(() => []),
+        ]);
         setQuizId(data.id);
         setQuestions(data.perguntas || []);
+        setModules(Array.isArray(listaModulos) ? listaModulos : []);
         startedAt.current = Date.now();
       } catch (err) {
         setError(err?.message || "Não foi possível carregar o quiz.");
@@ -104,6 +110,20 @@ export default function QuizPage() {
   }
 
   const score = useMemo(() => result?.acertos ?? 0, [result]);
+
+  const { moduloAtual, proximoModulo } = useMemo(() => {
+    const atual = modules.find((m) => String(m.id) === String(moduleId));
+    if (!atual) return { moduloAtual: null, proximoModulo: null };
+    const modulosDaLinguagem = modules
+      .filter((m) => m.linguagem === atual.linguagem)
+      .sort((a, b) => (a.ordem ?? 0) - (b.ordem ?? 0));
+    const indice = modulosDaLinguagem.findIndex(
+      (m) => String(m.id) === String(moduleId),
+    );
+    const proximo =
+      indice >= 0 ? modulosDaLinguagem[indice + 1] || null : null;
+    return { moduloAtual: atual, proximoModulo: proximo };
+  }, [modules, moduleId]);
   if (loading)
     return (
       <div className="quest-page">
@@ -194,16 +214,48 @@ export default function QuizPage() {
             </article>
           ))}
         </section>
+        {result.passou && (
+          <>
+            {proximoModulo ? (
+              <div className="quest-next-module">
+                <Trophy size={18} />
+                <span>
+                  Pronto para continuar? O próximo módulo é{" "}
+                  <strong>{proximoModulo.titulo}</strong>.
+                </span>
+              </div>
+            ) : moduloAtual ? (
+              <div className="quest-congrats">
+                <PartyPopper size={22} />
+                <div>
+                  <strong>Parabéns!</strong>
+                  <p>
+                    Terminaste os conteúdos de {moduloAtual.linguagem}
+                    !
+                  </p>
+                </div>
+              </div>
+            ) : null}
+          </>
+        )}
         <div className="quest-actions">
           <button className="primary-action" onClick={restart}>
             <RotateCcw size={18} /> Tentar novamente
           </button>
-          <Link
-            className="secondary-action"
-            to={result.passou ? "/linguagem" : `/modulo/${moduleId}`}
-          >
-            {result.passou ? "Voltar aos módulos" : "Rever módulo"}{" "}
-            <ArrowRight size={17} />
+          {result.passou && proximoModulo ? (
+            <Link
+              className="secondary-action"
+              to={`/modulo/${proximoModulo.id}`}
+            >
+              Próximo módulo <ArrowRight size={17} />
+            </Link>
+          ) : !result.passou ? (
+            <Link className="secondary-action" to={`/modulo/${moduleId}`}>
+              Rever módulo <ArrowRight size={17} />
+            </Link>
+          ) : null}
+          <Link className="secondary-action" to="/linguagem">
+            Voltar aos módulos <ArrowRight size={17} />
           </Link>
         </div>
       </div>
