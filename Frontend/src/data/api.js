@@ -33,8 +33,7 @@ async function pedido(
   caminho,
   { method = "GET", body, autenticado = true } = {},
 ) {
-  const eFormulario = body instanceof FormData;
-  const headers = eFormulario ? {} : { "Content-Type": "application/json" };
+  const headers = { "Content-Type": "application/json" };
 
   if (autenticado) {
     const token = getToken();
@@ -44,7 +43,7 @@ async function pedido(
   const resposta = await fetch(`${API_URL}${caminho}`, {
     method,
     headers,
-    body: body ? (eFormulario ? body : JSON.stringify(body)) : undefined,
+    body: body ? JSON.stringify(body) : undefined,
   });
 
   const contentType = resposta.headers.get("content-type") || "";
@@ -101,18 +100,16 @@ export const api = {
   login: (dados) =>
     pedido("/auth/login", { method: "POST", body: dados, autenticado: false }),
   perfil: () => pedido("/auth/perfil"),
-  editarPerfil: (dados) =>
-    pedido("/users/perfil", { method: "PATCH", body: dados }),
   recuperarPassword: (dados) =>
     pedido("/auth/recuperar-password", {
       method: "POST",
       body: dados,
       autenticado: false,
     }),
-  redefinirPassword: (token, novaSenha) =>
+  redefinirPassword: (token, novaPassword) =>
     pedido("/auth/redefinir-password", {
       method: "POST",
-      body: { token, novaSenha },
+      body: { token, novaPassword },
       autenticado: false,
     }),
 
@@ -137,9 +134,8 @@ export const api = {
   obterTentativasQuiz: (quizId) => pedido(`/quizzes/${quizId}/tentativas`),
 
   // Ranking
-  minhaPosicao: () => pedido("/ranking/minha-posicao"),
-  listarRanking: (pagina = 1, limite = 10) =>
-    pedido(`/ranking?pagina=${pagina}&limite=${limite}`),
+  minhaPosicao: () => pedido("/ranking/posicao"),
+  listarRanking: (pagina = 1) => pedido(`/ranking?pagina=${pagina}`),
 
   // Estatísticas e Conquistas
   estatisticas: () => pedido("/users/estatisticas"),
@@ -164,8 +160,8 @@ export function getProfile() {
   return api.perfil();
 }
 
-export function getRanking(pagina = 1) {
-  return api.listarRanking(pagina);
+export function getRanking() {
+  return api.listarRanking();
 }
 
 export function minhaPosicao() {
