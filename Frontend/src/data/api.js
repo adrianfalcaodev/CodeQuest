@@ -33,8 +33,7 @@ async function pedido(
   caminho,
   { method = "GET", body, autenticado = true } = {},
 ) {
-  const eFormulario = body instanceof FormData;
-  const headers = eFormulario ? {} : { "Content-Type": "application/json" };
+  const headers = { "Content-Type": "application/json" };
 
   if (autenticado) {
     const token = getToken();
@@ -44,7 +43,7 @@ async function pedido(
   const resposta = await fetch(`${API_URL}${caminho}`, {
     method,
     headers,
-    body: body ? (eFormulario ? body : JSON.stringify(body)) : undefined,
+    body: body ? JSON.stringify(body) : undefined,
   });
 
   const contentType = resposta.headers.get("content-type") || "";
@@ -109,10 +108,10 @@ export const api = {
       body: dados,
       autenticado: false,
     }),
-  redefinirPassword: (token, novaSenha) =>
+  redefinirPassword: (token, novaPassword) =>
     pedido("/auth/redefinir-password", {
       method: "POST",
-      body: { token, novaSenha },
+      body: { token, novaPassword },
       autenticado: false,
     }),
 
